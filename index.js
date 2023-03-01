@@ -50,13 +50,16 @@ bot.hears('Ver carrito de compras', (ctx) => {
   // ...
 });
 
-bot.on('text', async (ctx) => {
+/*bot.on('text', async (ctx) => {
   // Si existe un mensaje anterior en la conversación
   if (ctx.message.reply_to_message) {
     // Borrar el mensaje anterior
     await ctx.deleteMessage(ctx.message.reply_to_message.message_id);
-  }
-});
+  }*/
+
+  bot.on('text', (ctx) => {
+    ctx.reply('¡Hola! Soy un bot de Telegram.');
+  });
 
 bot.command('menu', (ctx) => {
   const menuOptions = [
