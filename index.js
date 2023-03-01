@@ -58,7 +58,7 @@ bot.on('text', async (ctx) => {
     await ctx.deleteMessage(ctx.message.reply_to_message.message_id);
     ctx.reply('¡hola colegui.');
   }
-  console.log(ctx);
+  console.log(ctx.update.message.from);
 });
 
 
