@@ -57,7 +57,9 @@ bot.on('text', async (ctx) => {
     // Borrar el mensaje anterior
     await ctx.deleteMessage(ctx.message.reply_to_message.message_id);
     ctx.reply('¡hola colegui.');
-  }});
+  }
+  console.log(ctx.message);
+});
 
 
 
