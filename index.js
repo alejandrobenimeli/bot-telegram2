@@ -10,6 +10,16 @@ const staticMenu = [
   [{ text: 'Añadir producto al carrito' }, { text: 'Ver carrito de compras' }]
 ];
 
+
+// Manejador de eventos para el mensaje inicial
+bot.on('message', async (ctx) => {
+  // Comprobar si el usuario es nuevo y no ha interactuado antes con el bot
+  if (ctx.update.message.chat.type === 'private' && !ctx.session.user) {
+    // Enviar el mensaje inicial
+    await ctx.reply('¡Hola! Soy un bot de Telegram. ¿En qué puedo ayudarte?')
+  }
+});
+
 // Comando para iniciar la conversación
 bot.start((ctx) => {
   // Mostrar el menú fijo
@@ -78,14 +88,7 @@ bot.on('text', async (ctx) => {
   previousMessageId = ctx.message.message_id;
 });
 
-// Manejador de eventos para el mensaje inicial
-bot.on('message', async (ctx) => {
-  // Comprobar si el usuario es nuevo y no ha interactuado antes con el bot
-  if (ctx.update.message.chat.type === 'private' && !ctx.session.user) {
-    // Enviar el mensaje inicial
-    await ctx.reply('¡Hola! Soy un bot de Telegram. ¿En qué puedo ayudarte?')
-  }
-})
+
 
 // evento que se produce cuando se le pasa algo al chat(foto, audio, sticker, texto)
 /*
