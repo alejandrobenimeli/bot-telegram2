@@ -78,7 +78,17 @@ bot.on('text', async (ctx) => {
   previousMessageId = ctx.message.message_id;
 });
 
-// Manejar el primer mensaje enviado por el usuario
+// Manejador de eventos para el mensaje inicial
+bot.on('message', async (ctx) => {
+  // Comprobar si el usuario es nuevo y no ha interactuado antes con el bot
+  if (ctx.update.message.chat.type === 'private' && !ctx.session.user) {
+    // Enviar el mensaje inicial
+    await ctx.reply('¡Hola! Soy un bot de Telegram. ¿En qué puedo ayudarte?')
+  }
+})
+
+// evento que se produce cuando se le pasa algo al chat(foto, audio, sticker, texto)
+/*
 bot.on('message', async (ctx) => {
   // Enviar un mensaje de bienvenida al usuario
   const welcomeMessage = '¡Hola! Gracias por iniciar esta conversación. Soy un bot creado por OpenAI.';
@@ -90,6 +100,7 @@ bot.on('message', async (ctx) => {
     console.log('Error al enviar el mensaje de bienvenida:', error);
   }
 });
+*/
 
 
 
