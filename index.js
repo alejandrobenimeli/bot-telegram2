@@ -50,15 +50,13 @@ bot.hears('Ver carrito de compras', (ctx) => {
   // ...
 });
 
-
+//borra el mensaje al que se responde
 bot.on('text', async (ctx) => {
   // Si existe un mensaje anterior en la conversación
   if (ctx.message.reply_to_message) {
     // Borrar el mensaje anterior
     await ctx.deleteMessage(ctx.message.reply_to_message.message_id);
-    ctx.reply('¡hola colegui.');
   }
-  console.log(ctx.update.message.from);
 });
 
 
