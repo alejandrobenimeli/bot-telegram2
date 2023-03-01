@@ -62,18 +62,23 @@ bot.on('text', async (ctx) => {
 */
 
 bot.on('text', async (ctx) => {
-  // Si existe un mensaje anterior en la conversación
-  if (ctx.session.previousMessageId) {
-    // Borrar el mensaje anterior
-    try {
-      await ctx.telegram.deleteMessage(ctx.chat.id, ctx.session.previousMessageId);
-      ctx.reply('¡Mensaje eliminado!');
-    } catch (error) {
-      console.log('Error al eliminar el mensaje anterior:', error);
+  try {
+    // Si existe un mensaje anterior en la conversación
+    if (ctx.session.previousMessageId) {
+      // Borrar el mensaje anterior
+      try {
+        await ctx.telegram.deleteMessage(ctx.chat.id, ctx.session.previousMessageId);
+        ctx.reply('¡Mensaje eliminado!');
+      } catch (error) {
+        console.log('Error al eliminar el mensaje anterior:', error);
+      }
     }
+    // Guardar el ID del mensaje actual como el mensaje anterior
+    ctx.session.previousMessageId = ctx.message.message_id;
+  } catch(error) {
+    console.log('El error es:', error);
   }
-  // Guardar el ID del mensaje actual como el mensaje anterior
-  ctx.session.previousMessageId = ctx.message.message_id;
+
 });
 
 
