@@ -50,7 +50,7 @@ bot.hears('Ver carrito de compras', (ctx) => {
   // ...
 });
 
-
+/*
 //borra el mensaje al que se responde
 bot.on('text', async (ctx) => {
   // Si existe un mensaje anterior en la conversación
@@ -59,8 +59,8 @@ bot.on('text', async (ctx) => {
     await ctx.deleteMessage(ctx.message.reply_to_message.message_id);
   }
 });
+*/
 
-/*
 bot.on('text', async (ctx) => {
   // Si existe un mensaje anterior en la conversación
   if (ctx.session.previousMessageId) {
@@ -74,7 +74,7 @@ bot.on('text', async (ctx) => {
   }
   // Guardar el ID del mensaje actual como el mensaje anterior
   ctx.session.previousMessageId = ctx.message.message_id;
-});*/
+});
 
 
 
