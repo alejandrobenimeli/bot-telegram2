@@ -77,6 +77,7 @@ bot.on('text', async (ctx) => {
     ctx.session.previousMessageId = ctx.message.message_id;
   } catch(error) {
     console.log('El error es:', error);
+    ctx.session.previousMessageId = ctx.message.message_id;
   }
 
 });
