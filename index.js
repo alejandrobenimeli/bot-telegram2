@@ -50,14 +50,14 @@ bot.hears('Ver carrito de compras', (ctx) => {
   // ...
 });
 
-/*
+
 bot.on('text', async (ctx) => {
   // Si existe un mensaje anterior en la conversación
   if (ctx.message.reply_to_message) {
     // Borrar el mensaje anterior
     await ctx.deleteMessage(ctx.message.reply_to_message.message_id);
     ctx.reply('¡hola colegui.');
-  }*/
+  }});
 
 
 
@@ -82,10 +82,11 @@ bot.on('callback_query', (ctx) => {
   }
 });
 
-//el evento se produce cuando el usario escribe algo
+/*
+//el evento se produce cuando el usario escribe algo, tiene que ir debajo del command.'menu' porque sino el command menu no lo coge y salta al evento on text
   bot.on('text', (ctx) => {
     ctx.reply('¡Hola! Soy un bot de Telegram.');
-  });
+  });*/
 
 bot.on('pre_checkout_query', (ctx) => {
   // Verificar y confirmar el pago
