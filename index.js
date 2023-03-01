@@ -1,6 +1,8 @@
 const { Telegraf } = require('telegraf');
 
 const bot = new Telegraf(process.env.TOKEN)
+let previousMessageId;
+
 
 // Menú fijo
 const staticMenu = [
@@ -62,19 +64,18 @@ bot.on('text', async (ctx) => {
 */
 
 bot.on('text', async (ctx) => {
-    // Si existe un mensaje anterior en la conversación
-    if (ctx.session.previousMessageId !== undefined && ctx.session.previousMessageId !== null) {
-      // Borrar el mensaje anterior
-      try {
-        await ctx.telegram.deleteMessage(ctx.chat.id, ctx.session.previousMessageId);
-        ctx.reply('¡Mensaje eliminado!');
-      } catch (error) {
-        console.log('Error al eliminar el mensaje anterior:', error);
-      }
+  // Si existe un mensaje anterior en la conversación
+  if (previousMessageId) {
+    // Borrar el mensaje anterior
+    try {
+      await ctx.telegram.deleteMessage(ctx.chat.id, previousMessageId);
+      ctx.reply('¡Mensaje eliminado!');
+    } catch (error) {
+      console.log('Error al eliminar el mensaje anterior:', error);
     }
-    // Guardar el ID del mensaje actual como el mensaje anterior
-    ctx.session.previousMessageId = ctx.message.message_id;
-
+  }
+  // Guardar el ID del mensaje actual como el mensaje anterior
+  previousMessageId = ctx.message.message_id;
 });
 
 
