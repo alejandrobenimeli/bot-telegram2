@@ -11,13 +11,15 @@ const staticMenu = [
 ];
 
 
-// Manejador de eventos para el mensaje inicial
-bot.on('message', async (ctx) => {
-  // Comprobar si el usuario es nuevo y no ha interactuado antes con el bot
-  if (ctx.update.message.chat.type === 'private' && !ctx.session.user) {
-    // Enviar el mensaje inicial
-    await ctx.reply('¡Hola! Soy un bot de Telegram. ¿En qué puedo ayudarte?')
+// Middleware para enviar un mensaje de bienvenida al abrir el chat
+bot.use(async (ctx, next) => {
+  // Verificar que la actualización sea un mensaje y no otra cosa
+  if (ctx.updateType === 'message') {
+    // Enviar mensaje de bienvenida
+    await ctx.reply(`¡Hola ${ctx.from.first_name}! Soy un bot de Telegram. ¿En qué puedo ayudarte?`)
   }
+  // Continuar con el siguiente middleware o controlador de eventos
+  return next()
 });
 
 // Comando para iniciar la conversación
