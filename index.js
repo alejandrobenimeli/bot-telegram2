@@ -63,7 +63,7 @@ bot.on('text', async (ctx) => {
 
 bot.on('text', async (ctx) => {
     // Si existe un mensaje anterior en la conversación
-    if ('previousMessageId' in ctx.session && ctx.session.previousMessageId !== null) {
+    if (ctx.session.previousMessageId !== undefined && ctx.session.previousMessageId !== null) {
       // Borrar el mensaje anterior
       try {
         await ctx.telegram.deleteMessage(ctx.chat.id, ctx.session.previousMessageId);
