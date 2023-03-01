@@ -60,10 +60,7 @@ bot.on('text', async (ctx) => {
   }*/
 
 
-//el evento se produce cuando el usario escribe algo
-  bot.on('text', (ctx) => {
-    ctx.reply('¡Hola! Soy un bot de Telegram.');
-  });
+
 
 bot.command('menu', (ctx) => {
   const menuOptions = [
@@ -84,6 +81,11 @@ bot.on('callback_query', (ctx) => {
     ctx.reply('Seleccionase la opción 2');
   }
 });
+
+//el evento se produce cuando el usario escribe algo
+  bot.on('text', (ctx) => {
+    ctx.reply('¡Hola! Soy un bot de Telegram.');
+  });
 
 bot.on('pre_checkout_query', (ctx) => {
   // Verificar y confirmar el pago
