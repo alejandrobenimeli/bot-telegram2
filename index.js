@@ -63,18 +63,6 @@ bot.on('text', async (ctx) => {
 });
 */
 
-// Manejar el primer mensaje enviado por el usuario
-bot.on('message', async (ctx) => {
-  // Enviar un mensaje de bienvenida al usuario
-  const welcomeMessage = '¡Hola! Gracias por iniciar esta conversación. Soy un bot creado por OpenAI.';
-
-  try {
-    await ctx.reply(welcomeMessage);
-  } catch (error) {
-    console.log('Error al enviar el mensaje de bienvenida:', error);
-  }
-});
-
 //elimina el ultimo mensaje y escribe el nuevo mensaje
 bot.on('text', async (ctx) => {
   // Si existe un mensaje anterior en la conversación
@@ -89,6 +77,21 @@ bot.on('text', async (ctx) => {
   // Guardar el ID del mensaje actual como el mensaje anterior
   previousMessageId = ctx.message.message_id;
 });
+
+// Manejar el primer mensaje enviado por el usuario
+bot.on('message', async (ctx) => {
+  // Enviar un mensaje de bienvenida al usuario
+  const welcomeMessage = '¡Hola! Gracias por iniciar esta conversación. Soy un bot creado por OpenAI.';
+
+  try {
+    await ctx.reply(welcomeMessage);
+    console.log(ctx);
+  } catch (error) {
+    console.log('Error al enviar el mensaje de bienvenida:', error);
+  }
+});
+
+
 
 
 
