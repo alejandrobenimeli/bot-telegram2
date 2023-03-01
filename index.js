@@ -62,7 +62,6 @@ bot.on('text', async (ctx) => {
 */
 
 bot.on('text', async (ctx) => {
-  try {
     // Si existe un mensaje anterior en la conversación
     if ('previousMessageId' in ctx.session && ctx.session.previousMessageId !== null) {
       // Borrar el mensaje anterior
@@ -75,7 +74,6 @@ bot.on('text', async (ctx) => {
     }
     // Guardar el ID del mensaje actual como el mensaje anterior
     ctx.session.previousMessageId = ctx.message.message_id;
-
 
 });
 
