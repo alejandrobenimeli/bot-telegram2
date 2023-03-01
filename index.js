@@ -63,13 +63,13 @@ bot.on('text', async (ctx) => {
 });
 */
 
+//elimina el ultimo mensaje y escribe el nuevo mensaje
 bot.on('text', async (ctx) => {
   // Si existe un mensaje anterior en la conversación
   if (previousMessageId) {
     // Borrar el mensaje anterior
     try {
       await ctx.telegram.deleteMessage(ctx.chat.id, previousMessageId);
-      ctx.reply('¡Mensaje eliminado!');
     } catch (error) {
       console.log('Error al eliminar el mensaje anterior:', error);
     }
