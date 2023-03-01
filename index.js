@@ -76,7 +76,6 @@ bot.on('text', async (ctx) => {
     // Guardar el ID del mensaje actual como el mensaje anterior
     ctx.session.previousMessageId = ctx.message.message_id;
   } catch(error) {
-    console.log('El error es:', error);
     ctx.session.previousMessageId = ctx.message.message_id;
   }
 
