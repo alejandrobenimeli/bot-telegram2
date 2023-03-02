@@ -23,7 +23,7 @@ bot.use(async (ctx, next) => {
 });
 
 // Comando para iniciar la conversación
-bot.start((ctx) => {
+bot.start(async (ctx) => {
   // Mostrar el menú fijo
   ctx.reply('¡Bienvenido! ¿Qué acción quieres realizar?', {
     reply_markup: {
