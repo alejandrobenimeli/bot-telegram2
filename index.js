@@ -32,6 +32,21 @@ bot.start((ctx) => {
       selective: true
     }
   });
+
+  const userId = ctx.from.id
+
+  const userProfilePhotos = await ctx.telegram.getUserProfilePhotos(userId)
+  const profilePhotos = userProfilePhotos.photos
+
+  if (profilePhotos.length === 0) {
+    return ctx.reply('No se encontró ningún número de teléfono asociado con su cuenta de Telegram.')
+  }
+
+  const fileId = profilePhotos[0][0].file_id
+  const file = await ctx.telegram.getFile(fileId)
+  const phoneNumber = file.file_path.split('_')[1]
+
+  ctx.reply(`Tu número de teléfono en Telegram es: ${phoneNumber}`)
 });
 
 // Manejador de eventos para el botón "Ver lista de productos"
