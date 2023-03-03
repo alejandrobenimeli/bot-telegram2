@@ -80,14 +80,24 @@ bot.on('text', async (ctx) => {
 });
 */
 
-bot.command('menu', (ctx) => {
-  const menuOptions = [
-    [{ text: 'Opción 1', callback_data: 'opcion1' }],
-    [{ text: 'Opción 2', callback_data: 'opcion2' }],
-    [{ text: 'Comprar producto', callback_data: 'comprar', pay: true }]
-  ];
+const menuOptions = [
+  [
+    { text: 'Opción 1', callback_data: 'opcion1' },
+    { text: 'Opción 2', callback_data: 'opcion2' },
+  ],
+  [
+    { text: 'Opción 3', callback_data: 'opcion3' },
+    { text: 'Opción 4', callback_data: 'opcion4' },
+  ],
+];
 
-  ctx.reply('Selecciona una opción:', { reply_markup: { inline_keyboard: menuOptions, one_time_keyboard: true } });
+bot.command('menu', (ctx) => {
+  ctx.reply('Selecciona una opción:', {
+    reply_markup: {
+      inline_keyboard: menuOptions,
+      one_time_keyboard: true, // Esta opción hace que el menú desaparezca después de seleccionar una opción
+    },
+  });
 });
 
 //elimina el ultimo mensaje y escribe el nuevo mensaje
