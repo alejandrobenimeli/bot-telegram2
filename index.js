@@ -87,7 +87,7 @@ bot.command('menu', (ctx) => {
     [{ text: 'Comprar producto', callback_data: 'comprar', pay: true }]
   ];
 
-  ctx.reply('Selecciona una opción:', { reply_markup: { inline_keyboard: menuOptions, selective: true } });
+  ctx.reply('Selecciona una opción:', { reply_markup: { inline_keyboard: menuOptions, one_time_keyboard: true } });
 });
 
 //elimina el ultimo mensaje y escribe el nuevo mensaje
