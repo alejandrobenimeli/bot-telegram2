@@ -94,8 +94,10 @@ const menuOptions = [
 bot.command('menu', (ctx) => {
   ctx.reply('Selecciona una opción:', {
     reply_markup: {
-      inline_keyboard: menuOptions,
-      one_time_keyboard: true, // Esta opción hace que el menú desaparezca después de seleccionar una opción
+      inline_keyboard: menuOptions.map(row => row.map(option => ({
+        ...option,
+        one_time_keyboard: true,
+      }))),
     },
   });
 });
