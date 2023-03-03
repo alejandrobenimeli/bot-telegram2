@@ -11,17 +11,6 @@ const staticMenu = [
 ];
 
 
-// Middleware para enviar un mensaje de bienvenida al abrir el chat
-bot.use(async (ctx, next) => {
-  // Verificar que la actualización sea un mensaje y no otra cosa
-  if (ctx.updateType === 'message') {
-    // Enviar mensaje de bienvenida
-    await ctx.reply(`¡Hola ${ctx.from.first_name}! Soy un bot de Telegram. ¿En qué puedo ayudarte?`)
-  }
-  // Continuar con el siguiente middleware o controlador de eventos
-  return next()
-});
-
 // Comando para iniciar la conversación
 bot.start(async (ctx) => {
   // Mostrar el menú fijo
@@ -32,7 +21,7 @@ bot.start(async (ctx) => {
       selective: true
     }
   });
-
+/*
   const userId = ctx.from.id
 
   const userProfilePhotos = await ctx.telegram.getUserProfilePhotos(userId)
@@ -47,6 +36,7 @@ bot.start(async (ctx) => {
   const phoneNumber = file.file_path.split('_')[1]
 
   ctx.reply(`Tu número de teléfono en Telegram es: ${phoneNumber}`)
+  */
 });
 
 // Manejador de eventos para el botón "Ver lista de productos"
@@ -90,6 +80,16 @@ bot.on('text', async (ctx) => {
 });
 */
 
+bot.command('menu', (ctx) => {
+  const menuOptions = [
+    [{ text: 'Opción 1', callback_data: 'opcion1' }],
+    [{ text: 'Opción 2', callback_data: 'opcion2' }],
+    [{ text: 'Comprar producto', callback_data: 'comprar', pay: true }]
+  ];
+
+  ctx.reply('Selecciona una opción:', { reply_markup: { inline_keyboard: menuOptions, selective: true } });
+});
+
 //elimina el ultimo mensaje y escribe el nuevo mensaje
 bot.on('text', async (ctx) => {
   // Si existe un mensaje anterior en la conversación
@@ -126,15 +126,7 @@ bot.on('message', async (ctx) => {
 
 
 
-bot.command('menu', (ctx) => {
-  const menuOptions = [
-    [{ text: 'Opción 1', callback_data: 'opcion1' }],
-    [{ text: 'Opción 2', callback_data: 'opcion2' }],
-    [{ text: 'Comprar producto', callback_data: 'comprar', pay: true }]
-  ];
 
-  ctx.reply('Selecciona una opción:', { reply_markup: { inline_keyboard: menuOptions } });
-});
 
 bot.on('callback_query', (ctx) => {
   const data = ctx.callbackQuery.data;
