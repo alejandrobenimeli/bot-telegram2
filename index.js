@@ -113,7 +113,13 @@ bot.command('menu', (ctx) => {
     },
   });
   */
-  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuOptions).oneTime());
+  //ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuOptions).oneTime());
+  ctx.reply('Selecciona una opción:', {
+    reply_markup: {
+      inline_keyboard: menuOptions,
+      one_time_keyboard: true
+    }
+  });
 });
 
 //elimina el ultimo mensaje y escribe el nuevo mensaje
