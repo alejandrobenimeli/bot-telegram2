@@ -90,7 +90,7 @@ const menuOptions = [
     { text: 'Opción 4', callback_data: 'opcion4' },
   ],
 ];
-
+/*
 bot.command('menu', (ctx) => {
   ctx.reply('Selecciona una opción:', {
     reply_markup: {
@@ -98,6 +98,17 @@ bot.command('menu', (ctx) => {
         ...option,
         one_time_keyboard: true,
       }))),
+    },
+  });
+});
+*/
+
+
+bot.command('menu', (ctx) => {
+  ctx.reply('Selecciona una opción:', {
+    reply_markup: {
+      inline_keyboard: menuOptions,
+      one_time_keyboard: true
     },
   });
 });
@@ -137,16 +148,42 @@ bot.on('message', async (ctx) => {
 
 
 
-
+const menuOptionsComida = [
+  [
+    { text: 'Espaguetis', callback_data: 'espaguetis' },
+    { text: 'Macarrones', callback_data: 'macarrones' },
+  ],
+  [
+    { text: 'Ajo', callback_data: 'ajo' },
+    { text: 'Sopa', callback_data: 'sopa' },
+  ],
+];
 
 
 bot.on('callback_query', (ctx) => {
   const data = ctx.callbackQuery.data;
 
   if (data === 'opcion1') {
-    ctx.reply('Seleccionaste la opción 1');
+    ctx.reply('Selecciona una opción:', {
+      reply_markup: {
+        inline_keyboard: menuOptionsComida,
+        one_time_keyboard: true
+      },
+    });
   } else if (data === 'opcion2') {
     ctx.reply('Seleccionase la opción 2');
+  } else if (data === 'opcion3') {
+    ctx.reply('Seleccionase la opción 2');
+  } else if (data === 'opcion4') {
+    ctx.reply('Seleccionase la opción 2');
+  } else if (data === 'espaguetis') {
+    ctx.reply('Seleccionase espaguetis');
+  } else if (data === 'macarrones') {
+    ctx.reply('Seleccionase macarrones');
+  } else if (data === 'ajo') {
+    ctx.reply('Seleccionase ajo');
+  } else if (data === 'sopa') {
+    ctx.reply('Seleccionase sopa');
   }
 });
 
