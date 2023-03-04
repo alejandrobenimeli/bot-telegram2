@@ -1,4 +1,4 @@
-const { Telegraf } = require('telegraf');
+const { Telegraf, Markup } = require('telegraf');
 
 const bot = new Telegraf(process.env.TOKEN)
 let previousMessageId;
@@ -105,12 +105,15 @@ bot.command('menu', (ctx) => {
 
 
 bot.command('menu', (ctx) => {
+  /*
   ctx.reply('Selecciona una opción:', {
     reply_markup: {
       inline_keyboard: menuOptions,
       one_time_keyboard: true
     },
   });
+  */
+  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuOptions).oneTime());
 });
 
 //elimina el ultimo mensaje y escribe el nuevo mensaje
