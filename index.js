@@ -189,16 +189,34 @@ bot.on('callback_query', async(ctx) => {
     menuAguardar = { chat_id: message.chat.id, message_id: message.message_id };
     ctx.editMessageText('Selecciona una opción de comida:', {
       reply_markup: {
-        inline_keyboard: menuOptionsComida,
-        one_time_keyboard: true
+        inline_keyboard: menuOptionsComida
       },
     });
   } else if (data === 'opcion2') {
+    ctx.editMessageText('Selecciona una opción de comida:', {
+      reply_markup: {
+        inline_keyboard: menuOptionsComida
+      },
+    });
     ctx.reply('Seleccionase la opción 2');
+    console.log(ctx);
   } else if (data === 'opcion3') {
-    ctx.editMessageText('Seleccionase la opción 3');
+    ctx.editMessageText('Selecciona una opción de comida:', {
+      reply_markup: {
+        inline_keyboard: menuOptionsComida
+      },
+    });
+    ctx.reply('Seleccionase la opción 3');
+    console.log(ctx);
   } else if (data === 'opcion4') {
-    ctx.editMessageText('Seleccionase la opción 4');
+    ctx.editMessageText('Selecciona una opción de comida:', {
+      reply_markup: {
+        inline_keyboard: menuOptionsComida
+      },
+    });
+    ctx.reply('Seleccionase la opción 4');
+    console.log(ctx);
+    
   } else if (data === 'espaguetis') {
     ctx.reply('Seleccionase espaguetis');
   } else if (data === 'macarrones') {
