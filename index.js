@@ -201,7 +201,7 @@ bot.on('callback_query', async(ctx) => {
       Markup.inlineKeyboard(menuOptions)
     );
     ctx.reply('Seleccionase la opción 2');
-    console.log(ctx);
+  
   } else if (data === 'opcion3') {
     ctx.telegram.editMessageText(
       menuAguardar.chat_id,
