@@ -210,11 +210,16 @@ bot.on('callback_query', async(ctx) => {
   } else if (data === 'back') {
     //await ctx.telegram.sendMessage(ctx.chat.id, '/menu'); // Envía el comando /menu al bot
     //ctx.reply('/menu');
-    /// Creamos un objeto contexto vacío
-    const emptyContext = {};
-
-    // Enviamos el comando miComando como si hubiéramos recibido el mensaje del usuario
-    bot.handleUpdate({ message: { text: '/menu' }, bot.context });
+    if (menuAguardar) {
+     // Si ya se mostró el menú antes, se muestra el mensaje guardado
+     ctx.telegram.editMessageText(
+       menuAguardar.chat_id,
+       menuAguardar.message_id,
+       null,
+       'Selecciona una opción:',
+       Markup.inlineKeyboard(menuOptions)
+     );
+   }
   }
 });
 
