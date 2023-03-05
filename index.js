@@ -176,17 +176,17 @@ bot.on('callback_query', (ctx) => {
   } else if (data === 'opcion2') {
     ctx.reply('Seleccionase la opción 2');
   } else if (data === 'opcion3') {
-    ctx.reply('Seleccionase la opción 2');
+    ctx.reply('Seleccionase la opción 3');
   } else if (data === 'opcion4') {
-    ctx.reply('Seleccionase la opción 2');
+    ctx.reply('Seleccionase la opción 4');
   } else if (data === 'espaguetis') {
-    ctx.reply('Seleccionase esaguetis');
+    ctx.editMessageText('Seleccionase espaguetis');
   } else if (data === 'macarrones') {
-    ctx.reply('Seleccionase macarrones');
+    ctx.editMessageText('Seleccionase macarrones');
   } else if (data === 'ajo') {
-    ctx.reply('Seleccionase ajo');
+    ctx.editMessageText('Seleccionase ajo');
   } else if (data === 'sopa') {
-    ctx.reply('Seleccionase sopa');
+    ctx.editMessageText('Seleccionase sopa');
   }
 });
 
