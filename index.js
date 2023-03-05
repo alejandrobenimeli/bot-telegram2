@@ -180,7 +180,7 @@ const menuOptionsComida = [
 ];
 
 
-bot.on('callback_query', (ctx) => {
+bot.on('callback_query', async(ctx) => {
   const data = ctx.callbackQuery.data;
 
   if (data === 'opcion1') {
@@ -208,7 +208,7 @@ bot.on('callback_query', (ctx) => {
   } else if (data === 'sopa') {
     ctx.reply('Seleccionase sopa');
   } else if (data === 'back') {
-    ctx.reply('/menu');
+    await ctx.telegram.sendMessage(ctx.chat.id, '/menu'); // Envía el comando /menu al bot
   }
 });
 
