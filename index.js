@@ -193,30 +193,36 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
-    ctx.editMessageText('Selecciona una opción de comida:', {
-      reply_markup: {
-        inline_keyboard: menuOptionsComida
-      },
-    });
+    ctx.telegram.editMessageText(
+      menuAguardar.chat_id,
+      menuAguardar.message_id,
+      null,
+      'Selecciona una opción:',
+      Markup.inlineKeyboard(menuOptions)
+    );
     ctx.reply('Seleccionase la opción 2');
     console.log(ctx);
   } else if (data === 'opcion3') {
-    ctx.editMessageText('Selecciona una opción de comida:', {
-      reply_markup: {
-        inline_keyboard: menuOptionsComida
-      },
-    });
+    ctx.telegram.editMessageText(
+      menuAguardar.chat_id,
+      menuAguardar.message_id,
+      null,
+      'Selecciona una opción:',
+      Markup.inlineKeyboard(menuOptions)
+    );
     ctx.reply('Seleccionase la opción 3');
     console.log(ctx);
   } else if (data === 'opcion4') {
-    ctx.editMessageText('Selecciona una opción de comida:', {
-      reply_markup: {
-        inline_keyboard: menuOptionsComida
-      },
-    });
+    ctx.telegram.editMessageText(
+      menuAguardar.chat_id,
+      menuAguardar.message_id,
+      null,
+      'Selecciona una opción:',
+      Markup.inlineKeyboard(menuOptions)
+    );
     ctx.reply('Seleccionase la opción 4');
     console.log(ctx);
-    
+
   } else if (data === 'espaguetis') {
     ctx.reply('Seleccionase espaguetis');
   } else if (data === 'macarrones') {
@@ -246,6 +252,36 @@ bot.on('callback_query', async(ctx) => {
   bot.on('text', (ctx) => {
     ctx.reply('¡Hola! Soy un bot de Telegram.');
   });*/
+
+  // Manejador del comando /menu
+bot.command('hola', (ctx) => {
+  // Enviar un mensaje al chat del usuario con un menú inline_keyboard
+  ctx.reply('Selecciona una opción:', {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: 'Opción 1', callback_data: 'opcion_1' },
+          { text: 'Opción 2', callback_data: 'opcion_2' },
+        ],
+      ],
+    },
+  }).then((menuMessage) => {
+    // Guardar el ID del mensaje con el menú para actualizarlo más tarde
+    const menuMessageId = menuMessage.message_id;
+
+    // Manejador de la opción 1 del menú
+    bot.action('opcion_1', (ctx) => {
+      // Actualizar el mensaje original con la respuesta
+      ctx.editMessageText('La opción 1 ha sido seleccionada.');
+    });
+
+    // Manejador de la opción 2 del menú
+    bot.action('opcion_2', (ctx) => {
+      // Actualizar el mensaje original con la respuesta
+      ctx.editMessageText('La opción 2 ha sido seleccionada.');
+    });
+  });
+});
 
 bot.on('pre_checkout_query', (ctx) => {
   // Verificar y confirmar el pago
