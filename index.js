@@ -119,7 +119,7 @@ bot.command('menu', (ctx) => {
   if (menuAguardar) {
    // Si ya se mostró el menú antes, se muestra el mensaje guardado
    ctx.telegram.editMessageText(
-     menuAguardar.chat.id,
+     menuAguardar.chat_id,
      menuAguardar.message_id,
      null,
      'Selecciona una opción:',
