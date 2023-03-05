@@ -214,7 +214,7 @@ bot.on('callback_query', async(ctx) => {
     const emptyContext = {};
 
     // Enviamos el comando miComando como si hubiéramos recibido el mensaje del usuario
-    bot.handleUpdate({ message: { text: '/menu' }, ...emptyContext });
+    bot.handleUpdate({ message: { text: '/menu' }, ctx });
   }
 });
 
