@@ -209,7 +209,12 @@ bot.on('callback_query', async(ctx) => {
     ctx.reply('Seleccionase sopa');
   } else if (data === 'back') {
     //await ctx.telegram.sendMessage(ctx.chat.id, '/menu'); // Envía el comando /menu al bot
-    ctx.reply('/menu');
+    //ctx.reply('/menu');
+    /// Creamos un objeto contexto vacío
+    const emptyContext = {};
+
+    // Enviamos el comando miComando como si hubiéramos recibido el mensaje del usuario
+    bot.handleUpdate({ message: { text: '/menu' }, ...emptyContext });
   }
 });
 
