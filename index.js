@@ -208,7 +208,8 @@ bot.on('callback_query', async(ctx) => {
   } else if (data === 'sopa') {
     ctx.reply('Seleccionase sopa');
   } else if (data === 'back') {
-    await ctx.telegram.sendMessage(ctx.chat.id, '/menu'); // Envía el comando /menu al bot
+    //await ctx.telegram.sendMessage(ctx.chat.id, '/menu'); // Envía el comando /menu al bot
+    ctx.reply('/menu');
   }
 });
 
