@@ -103,11 +103,11 @@ bot.command('menu', (ctx) => {
 });
 */
 
+let menuAborrar;
 
 bot.command('menu', (ctx) => {
   //ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuOptions).oneTime());
-  ctx.deleteMessage();
-  ctx.reply('Selecciona una opción:', {
+  menuAborrar = ctx.reply('Selecciona una opción:', {
     reply_markup: {
       inline_keyboard: menuOptions,
       one_time_keyboard: true
@@ -166,6 +166,8 @@ bot.on('callback_query', (ctx) => {
   const data = ctx.callbackQuery.data;
 
   if (data === 'opcion1') {
+    console.log(menuAborrar);
+    menuAborrar.deleteMessage();
     ctx.reply('Selecciona una opción:', {
       reply_markup: {
         inline_keyboard: menuOptionsComida,
