@@ -167,7 +167,7 @@ bot.on('callback_query', (ctx) => {
 
   if (data === 'opcion1') {
     console.log(menuAborrar);
-    menuAborrar.deleteMessage();
+    ctx.telegram.deleteMessage(menuAborrar.chat.id, menuAborrar.message.message_id);
     ctx.reply('Selecciona una opción:', {
       reply_markup: {
         inline_keyboard: menuOptionsComida,
