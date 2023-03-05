@@ -105,15 +105,8 @@ bot.command('menu', (ctx) => {
 
 
 bot.command('menu', (ctx) => {
-  /*
-  ctx.reply('Selecciona una opción:', {
-    reply_markup: {
-      inline_keyboard: menuOptions,
-      one_time_keyboard: true
-    },
-  });
-  */
   //ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuOptions).oneTime());
+  ctx.deleteMessage();
   ctx.reply('Selecciona una opción:', {
     reply_markup: {
       inline_keyboard: menuOptions,
