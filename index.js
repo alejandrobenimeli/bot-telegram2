@@ -193,33 +193,12 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
-    ctx.telegram.editMessageText(
-      menuAguardar.chat_id,
-      menuAguardar.message_id,
-      null,
-      'Selecciona una opción:',
-      Markup.inlineKeyboard(menuOptions)
-    );
     ctx.reply('Seleccionase la opción 2');
-  
+
   } else if (data === 'opcion3') {
-    ctx.telegram.editMessageText(
-      menuAguardar.chat_id,
-      menuAguardar.message_id,
-      null,
-      'Selecciona una opción:',
-      Markup.inlineKeyboard(menuOptions)
-    );
     ctx.reply('Seleccionase la opción 3');
     console.log(ctx);
   } else if (data === 'opcion4') {
-    ctx.telegram.editMessageText(
-      menuAguardar.chat_id,
-      menuAguardar.message_id,
-      null,
-      'Selecciona una opción:',
-      Markup.inlineKeyboard(menuOptions)
-    );
     ctx.reply('Seleccionase la opción 4');
     console.log(ctx);
 
