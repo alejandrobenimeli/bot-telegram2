@@ -194,11 +194,11 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
-    ctx.reply('Seleccionase la opción 2');
+    ctx.editMessageText('Seleccionase la opción 2');
   } else if (data === 'opcion3') {
-    ctx.reply('Seleccionase la opción 3');
+    ctx.editMessageText('Seleccionase la opción 3');
   } else if (data === 'opcion4') {
-    ctx.reply('Seleccionase la opción 4');
+    ctx.editMessageText('Seleccionase la opción 4');
   } else if (data === 'espaguetis') {
     ctx.reply('Seleccionase espaguetis');
   } else if (data === 'macarrones') {
