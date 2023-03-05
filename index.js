@@ -103,16 +103,32 @@ bot.command('menu', (ctx) => {
 });
 */
 
-let menuAborrar;
+// Variable para guardar el mensaje del menú
+let menuAguardar = null;
 
 bot.command('menu', (ctx) => {
   //ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuOptions).oneTime());
-  menuAborrar = ctx.reply('Selecciona una opción gay:', {
+  /*
+  ctx.reply('Selecciona una opción gay:', {
     reply_markup: {
       inline_keyboard: menuOptions,
       one_time_keyboard: true
     }
   });
+  */
+  if (menuAguardar) {
+   // Si ya se mostró el menú antes, se muestra el mensaje guardado
+   ctx.telegram.editMessageText(
+     menuAguardar.chat.id,
+     menuAguardar.message_id,
+     null,
+     'Selecciona una opción:',
+     Markup.inlineKeyboard(menuOptions).extra()
+   );
+ } else {
+   // Si es la primera vez que se muestra el menú, se envía un mensaje nuevo
+   ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuOptions));
+ }
 });
 
 //elimina el ultimo mensaje y escribe el nuevo mensaje
@@ -158,7 +174,9 @@ const menuOptionsComida = [
   [
     { text: 'Ajo', callback_data: 'ajo' },
     { text: 'Sopa', callback_data: 'sopa' },
-  ],
+  ], [
+    { text: 'Back', callback_data: 'back' }
+  ]
 ];
 
 
@@ -167,6 +185,8 @@ bot.on('callback_query', (ctx) => {
 
   if (data === 'opcion1') {
     //ctx.telegram.deleteMessage(menuAborrar.chat.id, menuAborrar.message.message_id);
+    const message = ctx.callbackQuery.message;
+    menuAguardar = { chat_id: message.chat.id, message_id: message.message_id };
     ctx.editMessageText('Selecciona una opción de comida:', {
       reply_markup: {
         inline_keyboard: menuOptionsComida,
@@ -180,13 +200,15 @@ bot.on('callback_query', (ctx) => {
   } else if (data === 'opcion4') {
     ctx.reply('Seleccionase la opción 4');
   } else if (data === 'espaguetis') {
-    ctx.editMessageText('Seleccionase espaguetis');
+    ctx.reply('Seleccionase espaguetis');
   } else if (data === 'macarrones') {
-    ctx.editMessageText('Seleccionase macarrones');
+    ctx.reply('Seleccionase macarrones');
   } else if (data === 'ajo') {
-    ctx.editMessageText('Seleccionase ajo');
+    ctx.reply('Seleccionase ajo');
   } else if (data === 'sopa') {
-    ctx.editMessageText('Seleccionase sopa');
+    ctx.reply('Seleccionase sopa');
+  } else if (data === 'back') {
+    ctx.reply('/menu');
   }
 });
 
