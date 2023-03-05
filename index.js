@@ -194,7 +194,12 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
-    ctx.editMessageText('Seleccionase la opción 2');
+    ctx.editMessageText('Selecciona una opción de comida:', {
+      reply_markup: {
+        inline_keyboard: menuOptionsComida,
+        one_time_keyboard: true
+      }, 'Seleccionase la opción 3'
+    });
   } else if (data === 'opcion3') {
     ctx.editMessageText('Seleccionase la opción 3');
   } else if (data === 'opcion4') {
