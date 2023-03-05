@@ -166,8 +166,8 @@ bot.on('callback_query', (ctx) => {
   const data = ctx.callbackQuery.data;
 
   if (data === 'opcion1') {
-    console.log('el chat: '+menuAborrar.chat);
-    console.log('el chat id: '+menuAborrar.chat.id);
+    console.log('el chat de menu a borrar\n: '+menuAborrar);
+    console.log('el ctx: '+ctx);
     ctx.telegram.deleteMessage(menuAborrar.chat.id, menuAborrar.message.message_id);
     ctx.reply('Selecciona una opción:', {
       reply_markup: {
