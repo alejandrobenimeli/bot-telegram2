@@ -180,7 +180,7 @@ bot.on('callback_query', (ctx) => {
   } else if (data === 'opcion4') {
     ctx.reply('Seleccionase la opción 2');
   } else if (data === 'espaguetis') {
-    ctx.reply('Seleccionase espaguetis');
+    ctx.reply('Seleccionase esaguetis');
   } else if (data === 'macarrones') {
     ctx.reply('Seleccionase macarrones');
   } else if (data === 'ajo') {
