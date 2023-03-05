@@ -123,7 +123,7 @@ bot.command('menu', (ctx) => {
      menuAguardar.message_id,
      null,
      'Selecciona una opción:',
-     Markup.inlineKeyboard(menuOptions).extra()
+     Markup.inlineKeyboard(menuOptions)
    );
  } else {
    // Si es la primera vez que se muestra el menú, se envía un mensaje nuevo
