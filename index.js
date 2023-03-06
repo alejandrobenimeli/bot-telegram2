@@ -182,6 +182,7 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
+    /*
     if(mensajeDeRespuesta) {
       try {
         console.log(mensajeDeRespuesta);
@@ -192,6 +193,14 @@ bot.on('callback_query', async(ctx) => {
       }
     }
     mensajeDeRespuesta = ctx.reply('Seleccionase la opción 2');
+    */
+    ctx.reply('Seleccionase la opción 2').then((ctxResponse) => {
+  const message_id = ctxResponse.message_id;
+  const chat_id = ctxResponse.chat.id;
+
+  console.log('el mensaje id: '+message_id); // Imprime el message_id, en este caso 1554
+  console.log('el chat id:'+chat_id); // Imprime el chat.id, en este caso 5997313040
+});
 
   } else if (data === 'opcion3') {
     if(mensajeDeRespuesta) {
