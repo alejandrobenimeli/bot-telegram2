@@ -184,7 +184,7 @@ bot.on('callback_query', async(ctx) => {
   } else if (data === 'opcion2') {
     if(mensajeDeRespuesta) {
       try {
-        console.log('mensaje id:'+mensajeDeRespuesta);
+        console.log(mensajeDeRespuesta);
         console.log('el chat id: '+mensajeDeRespuesta);
         //await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat.id, mensajeDeRespuesta.message_id);
       } catch (error) {
