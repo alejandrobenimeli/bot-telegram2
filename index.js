@@ -168,7 +168,7 @@ const menuOptionsComida = [
 
 let mensajeDeRespuesta = null;
 
-function borrarRespuestaOpcion() {
+async function borrarRespuestaOpcion(ctx) {
   if(mensajeDeRespuesta) {
     try {
       console.log(mensajeDeRespuesta);
@@ -193,7 +193,7 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
-    borrarRespuestaOpcion();
+    borrarRespuestaOpcion(ctx);
     ctx.reply('Seleccionase la opción 2').then((ctxResponse) => {
     //const message_id = ctxResponse.message_id;
     //const chat_id = ctxResponse.chat.id;
