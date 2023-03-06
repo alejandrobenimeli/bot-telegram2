@@ -184,11 +184,12 @@ bot.on('callback_query', async(ctx) => {
 
   } else if (data === 'opcion3') {
     ctx.reply('Seleccionase la opción 3');
-    console.log(ctx);
+    console.log(ctx.from);
+    console.log(ctx.message);
   } else if (data === 'opcion4') {
     ctx.reply('Seleccionase la opción 4');
-    console.log(ctx);
-
+    console.log(ctx.from);
+    console.log(ctx.message);
   } else if (data === 'espaguetis') {
     ctx.reply('Seleccionase espaguetis');
   } else if (data === 'macarrones') {
