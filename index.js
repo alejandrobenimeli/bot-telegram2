@@ -195,8 +195,9 @@ bot.on('callback_query', async(ctx) => {
   } else if (data === 'opcion2') {
     borrarRespuestaOpcion(ctx);
       ctx.reply('Seleccionaste la opción 2').then((ctxResponse) => {
-      mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id}
-    });
+        mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id};
+        console.log(ctxResponse);
+      });
 
   } else if (data === 'opcion3') {
     borrarRespuestaOpcion(ctx);
