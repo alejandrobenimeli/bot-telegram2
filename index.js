@@ -172,7 +172,8 @@ async function borrarRespuestaOpcion(ctx) {
   if(mensajeDeRespuesta) {
     try {
       console.log(mensajeDeRespuesta);
-      await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id);
+      //await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id);
+      await ctx.telegram.editMessageText(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id);
     } catch (error) {
       console.log('Error al eliminar el mensaje anterior:', error);
     }
