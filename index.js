@@ -184,9 +184,9 @@ bot.on('callback_query', async(ctx) => {
   } else if (data === 'opcion2') {
     if(mensajeDeRespuesta) {
       try {
-        console.log(mensajeDeRespuesta.message_id);
-        console.log(mensajeDeRespuesta.chat.id);
-        await ctx.telegram.deleteMessage(ctx.chat.id, mensajeDeRespuesta.message_id);
+        console.log('mensaje id:'+mensajeDeRespuesta.message_id);
+        console.log('chat id: '+mensajeDeRespuesta.chat.id);
+        await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat.id, mensajeDeRespuesta.message_id);
       } catch (error) {
         console.log('Error al eliminar el mensaje anterior:', error);
       }
@@ -196,7 +196,8 @@ bot.on('callback_query', async(ctx) => {
   } else if (data === 'opcion3') {
     if(mensajeDeRespuesta) {
       try {
-        console.log(mensajeDeRespuesta);
+        console.log('mensaje id:'+mensajeDeRespuesta.message_id);
+        console.log('chat id: '+mensajeDeRespuesta.chat.id);
         await ctx.telegram.deleteMessage(ctx.chat.id, mensajeDeRespuesta.message_id);
       } catch (error) {
         console.log('Error al eliminar el mensaje anterior:', error);
