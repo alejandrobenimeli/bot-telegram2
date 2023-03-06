@@ -166,6 +166,8 @@ const menuOptionsComida = [
   ]
 ];
 
+let mensajeDeRespuesta = null;
+
 
 bot.on('callback_query', async(ctx) => {
   const data = ctx.callbackQuery.data;
@@ -180,12 +182,25 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
-    ctx.reply('Seleccionase la opción 2');
+    if(mensajeDeRespuesta) {
+      try {
+        await ctx.telegram.deleteMessage(ctx.chat.id, mensajeDeRespuesta.message.message_id);
+      } catch (error) {
+        console.log('Error al eliminar el mensaje anterior:', error);
+      }
+    }
+    mensajeDeRespuesta = ctx.reply('Seleccionase la opción 2');
 
   } else if (data === 'opcion3') {
-    ctx.reply('Seleccionase la opción 3');
-    console.log(ctx.from);
-    console.log(ctx.message);
+    if(mensajeDeRespuesta) {
+      try {
+        await ctx.telegram.deleteMessage(ctx.chat.id, mensajeDeRespuesta.message.message_id);
+      } catch (error) {
+        console.log('Error al eliminar el mensaje anterior:', error);
+      }
+    }
+    mensajeDeRespuesta = ctx.reply('Seleccionase la opción 3');
+  
   } else if (data === 'opcion4') {
     ctx.reply('Seleccionase la opción 4');
     console.log(ctx.from);
@@ -221,6 +236,7 @@ bot.on('callback_query', async(ctx) => {
   });*/
 
   // Manejador del comando /menu
+/*
 bot.command('hola', (ctx) => {
   // Enviar un mensaje al chat del usuario con un menú inline_keyboard
   ctx.reply('Selecciona una opción:', {
@@ -248,7 +264,7 @@ bot.command('hola', (ctx) => {
       ctx.editMessageText('La opción 2 ha sido seleccionada.');
     });
   });
-});
+}); */
 
 
 //elimina el ultimo mensaje y escribe el nuevo mensaje
