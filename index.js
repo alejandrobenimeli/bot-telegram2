@@ -168,7 +168,7 @@ const menuOptionsComida = [
 
 let mensajeDeRespuesta = null;
 
-borrarRespuestaOpcion() {
+function borrarRespuestaOpcion() {
   if(mensajeDeRespuesta) {
     try {
       console.log(mensajeDeRespuesta);
