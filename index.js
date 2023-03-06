@@ -239,7 +239,7 @@ bot.command('hola', (ctx) => {
     reply_markup: {
       inline_keyboard: [
         [
-          { text: 'Opción 1', callback_data: 'opcion_1' },
+          { text: 'Opcion 1', callback_data: 'opcion_1' },
           { text: 'Opción 2', callback_data: 'opcion_2' },
         ],
       ],
