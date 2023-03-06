@@ -131,20 +131,7 @@ bot.command('menu', (ctx) => {
  }
 });
 
-//elimina el ultimo mensaje y escribe el nuevo mensaje
-bot.on('text', async (ctx) => {
-  // Si existe un mensaje anterior en la conversación
-  if (previousMessageId) {
-    // Borrar el mensaje anterior
-    try {
-      await ctx.telegram.deleteMessage(ctx.chat.id, previousMessageId);
-    } catch (error) {
-      console.log('Error al eliminar el mensaje anterior:', error);
-    }
-  }
-  // Guardar el ID del mensaje actual como el mensaje anterior
-  previousMessageId = ctx.message.message_id;
-});
+
 
 
 
@@ -260,6 +247,22 @@ bot.command('hola', (ctx) => {
       ctx.editMessageText('La opción 2 ha sido seleccionada.');
     });
   });
+});
+
+
+//elimina el ultimo mensaje y escribe el nuevo mensaje
+bot.on('text', async (ctx) => {
+  // Si existe un mensaje anterior en la conversación
+  if (previousMessageId) {
+    // Borrar el mensaje anterior
+    try {
+      await ctx.telegram.deleteMessage(ctx.chat.id, previousMessageId);
+    } catch (error) {
+      console.log('Error al eliminar el mensaje anterior:', error);
+    }
+  }
+  // Guardar el ID del mensaje actual como el mensaje anterior
+  previousMessageId = ctx.message.message_id;
 });
 
 bot.on('pre_checkout_query', (ctx) => {
