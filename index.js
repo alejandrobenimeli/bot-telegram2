@@ -168,6 +168,17 @@ const menuOptionsComida = [
 
 let mensajeDeRespuesta = null;
 
+borrarRespuestaOpcion() {
+  if(mensajeDeRespuesta) {
+    try {
+      console.log(mensajeDeRespuesta);
+      //console.log('el chat id: '+mensajeDeRespuesta);
+      await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id);
+    } catch (error) {
+      console.log('Error al eliminar el mensaje anterior:', error);
+    }
+  }
+}
 
 bot.on('callback_query', async(ctx) => {
   const data = ctx.callbackQuery.data;
@@ -182,24 +193,13 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
-    /*
-    if(mensajeDeRespuesta) {
-      try {
-        console.log(mensajeDeRespuesta);
-        console.log('el chat id: '+mensajeDeRespuesta);
-        //await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat.id, mensajeDeRespuesta.message_id);
-      } catch (error) {
-        console.log('Error al eliminar el mensaje anterior:', error);
-      }
-    }
-    mensajeDeRespuesta = ctx.reply('Seleccionase la opción 2');
-    */
+    borrarRespuestaOpcion();
     ctx.reply('Seleccionase la opción 2').then((ctxResponse) => {
-  const message_id = ctxResponse.message_id;
-  const chat_id = ctxResponse.chat.id;
+    //const message_id = ctxResponse.message_id;
+    //const chat_id = ctxResponse.chat.id;
+    mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id}
 
-  console.log('el mensaje id: '+message_id); // Imprime el message_id, en este caso 1554
-  console.log('el chat id:'+chat_id); // Imprime el chat.id, en este caso 5997313040
+
 });
 
   } else if (data === 'opcion3') {
