@@ -168,7 +168,7 @@ const menuOptionsComida = [
 
 let mensajeDeRespuesta = null;
 
-async function borrarRespuestaOpcion(ctx) {
+async function borrarRespuestaOpcion(ctx, nuevoTexto) {
   if(mensajeDeRespuesta) {
     try {
       if(nuevoTexto !==  mensajeDeRespuesta.text) {
