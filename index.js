@@ -200,13 +200,13 @@ bot.on('callback_query', async(ctx) => {
       });
 
   } else if (data === 'opcion3') {
-    borrarRespuestaOpcion(ctx,'Seleccionaste la opción 2');
+    borrarRespuestaOpcion(ctx,'Seleccionaste la opción 3');
       ctx.reply('Seleccionaste la opción 3').then((ctxResponse) => {
       mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text}
     });
 
   } else if (data === 'opcion4') {
-    borrarRespuestaOpcion(ctx,'Seleccionaste la opción 2');
+    borrarRespuestaOpcion(ctx,'Seleccionaste la opción 4');
       ctx.reply('Seleccionaste la opción 4').then((ctxResponse) => {
       mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text}
     });
