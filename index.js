@@ -197,13 +197,15 @@ bot.on('callback_query', async(ctx) => {
     });
   } else if (data === 'opcion2') {
     borrarRespuestaOpcion(ctx,'Seleccionaste la opción 2');
+    ctx.reply(null);
+    /*
     try {
       ctx.reply(null).then((ctxResponse) => {
         mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text};
       });
     } catch (error) {
       console.log('Me suda la polla:', error);
-    }
+    }*/
 
 
   } else if (data === 'opcion3') {
