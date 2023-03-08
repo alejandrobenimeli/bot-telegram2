@@ -178,6 +178,8 @@ async function borrarRespuestaOpcion(ctx, nuevoTexto) {
     } catch (error) {
       console.log('Error al eliminar el mensaje anterior:', error);
     }
+  } else {
+    console.log('se fue aqui');
   }
 }
 
