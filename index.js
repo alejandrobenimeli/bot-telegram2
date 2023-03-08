@@ -166,23 +166,23 @@ const menuOptionsComida = [
   ]
 ];
 
-let mensajeDeRespuesta = null;
+let mensajeAnterior = null;
 
-async function borrarRespuestaOpcion(ctx, nuevoTexto) {
-  if(mensajeDeRespuesta) {
+//modifica el mensaje si previamente se ha escrito uno, sino se hara el reply
+async function ctxReply(ctx, nuevoTexto) {
+  if(mensajeAnterior) {
     try {
-      if(nuevoTexto !==  mensajeDeRespuesta.text) {
-        //await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id);
-        await ctx.telegram.editMessageText(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id, null, nuevoTexto);
-        mensajeDeRespuesta.text = nuevoTexto;
+      if(nuevoTexto !==  mensajeAnterior.text) {
+        //await ctx.telegram.deleteMessage(mensajeAnterior.chat_id, mensajeAnterior.message_id);
+        await ctx.telegram.editMessageText(mensajeAnterior.chat_id, mensajeAnterior.message_id, null, nuevoTexto);
+        mensajeAnterior.text = nuevoTexto;
       }
     } catch (error) {
       console.log('Error al eliminar el mensaje anterior:', error);
     }
   } else {
-    console.log('se fue aqui');
     ctx.reply(nuevoTexto).then((ctxResponse) => {
-      mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text};
+      mensajeAnterior = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text};
     });
   }
 }
@@ -200,18 +200,18 @@ bot.on('callback_query', async(ctx) => {
       },
     });
   } else if (data === 'opcion2') {
-    borrarRespuestaOpcion(ctx,'Seleccionaste la opción 2');
+    ctxReply(ctx,'Seleccionaste la opción 2');
 
   } else if (data === 'opcion3') {
-    borrarRespuestaOpcion(ctx,'Seleccionaste la opción 3');
+    ctxReply(ctx,'Seleccionaste la opción 3');
 
   } else if (data === 'opcion4') {
-    borrarRespuestaOpcion(ctx,'Seleccionaste la opción 4');
+    ctxReply(ctx,'Seleccionaste la opción 4');
 
   } else if (data === 'espaguetis') {
-    ctx.reply('Seleccionase espaguetis');
+    ctxReply('Seleccionase espaguetis');
   } else if (data === 'macarrones') {
-    ctx.reply('Seleccionase macarrones');
+    ctxReply('Seleccionase macarrones');
   } else if (data === 'ajo') {
     ctx.reply('Seleccionase ajo');
   } else if (data === 'sopa') {
