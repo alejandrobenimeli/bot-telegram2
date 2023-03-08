@@ -209,9 +209,9 @@ bot.on('callback_query', async(ctx) => {
     ctxReply(ctx,'Seleccionaste la opción 4');
 
   } else if (data === 'espaguetis') {
-    ctxReply('Seleccionase espaguetis');
+    ctxReply(ctx,'Seleccionase espaguetis');
   } else if (data === 'macarrones') {
-    ctxReply('Seleccionase macarrones');
+    ctxReply(ctx,'Seleccionase macarrones');
   } else if (data === 'ajo') {
     ctx.reply('Seleccionase ajo');
   } else if (data === 'sopa') {
