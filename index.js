@@ -173,7 +173,7 @@ async function borrarRespuestaOpcion(ctx, nuevoTexto) {
     try {
       if(nuevoTexto !==  mensajeDeRespuesta.text) {
         //await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id);
-        await ctx.telegram.editMessageText(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id, null, mensajeDeRespuesta.text);
+        await ctx.telegram.editMessageText(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id, null, nuevoTexto);
       }
     } catch (error) {
       console.log('Error al eliminar el mensaje anterior:', error);
@@ -195,13 +195,13 @@ bot.on('callback_query', async(ctx) => {
     });
   } else if (data === 'opcion2') {
     borrarRespuestaOpcion(ctx,'Seleccionaste la opción 2');
-      ctx.reply('Seleccionaste la opción 2').then((ctxResponse) => {
+      ctx.reply(null).then((ctxResponse) => {
         mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text};
       });
 
   } else if (data === 'opcion3') {
     borrarRespuestaOpcion(ctx,'Seleccionaste la opción 3');
-      ctx.reply('Seleccionaste la opción 3').then((ctxResponse) => {
+      ctx.reply(null).then((ctxResponse) => {
       mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text}
     });
 
