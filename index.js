@@ -178,7 +178,7 @@ async function ctxReply(ctx, nuevoTexto) {
         mensajeAnterior.text = nuevoTexto;
       }
     } catch (error) {
-      console.log('Error al eliminar el mensaje anterior:', error);
+      console.log('Error al eliminar el mensaje anterio:', error);
     }
   } else {
     ctx.reply(nuevoTexto).then((ctxResponse) => {
