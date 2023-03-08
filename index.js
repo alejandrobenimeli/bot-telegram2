@@ -197,7 +197,7 @@ bot.on('callback_query', async(ctx) => {
     });
   } else if (data === 'opcion2') {
     borrarRespuestaOpcion(ctx,'Seleccionaste la opción 2');
-    ctx.reply("HOLA");
+    ctx.reply(null);
     /*
     try {
       ctx.reply(null).then((ctxResponse) => {
