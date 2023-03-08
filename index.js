@@ -174,6 +174,7 @@ async function borrarRespuestaOpcion(ctx, nuevoTexto) {
       if(nuevoTexto !==  mensajeDeRespuesta.text) {
         //await ctx.telegram.deleteMessage(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id);
         await ctx.telegram.editMessageText(mensajeDeRespuesta.chat_id, mensajeDeRespuesta.message_id, null, nuevoTexto);
+        mensajeDeRespuesta.text = nuevoTexto;
       }
     } catch (error) {
       console.log('Error al eliminar el mensaje anterior:', error);
@@ -206,7 +207,7 @@ bot.on('callback_query', async(ctx) => {
 
   } else if (data === 'opcion4') {
     borrarRespuestaOpcion(ctx,'Seleccionaste la opción 4');
-    
+
   } else if (data === 'espaguetis') {
     ctx.reply('Seleccionase espaguetis');
   } else if (data === 'macarrones') {
