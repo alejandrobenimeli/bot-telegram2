@@ -180,6 +180,9 @@ async function borrarRespuestaOpcion(ctx, nuevoTexto) {
     }
   } else {
     console.log('se fue aqui');
+    ctx.reply(nuevoTexto).then((ctxResponse) => {
+      mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text};
+    });
   }
 }
 
@@ -197,7 +200,7 @@ bot.on('callback_query', async(ctx) => {
     });
   } else if (data === 'opcion2') {
     borrarRespuestaOpcion(ctx,'Seleccionaste la opción 2');
-    ctx.reply("");
+    //ctx.reply("");
     /*
     try {
       ctx.reply(null).then((ctxResponse) => {
@@ -210,9 +213,10 @@ bot.on('callback_query', async(ctx) => {
 
   } else if (data === 'opcion3') {
     borrarRespuestaOpcion(ctx,'Seleccionaste la opción 3');
+    /*
       ctx.reply(null).then((ctxResponse) => {
       mensajeDeRespuesta = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text}
-    });
+    });*/
 
   } else if (data === 'opcion4') {
     borrarRespuestaOpcion(ctx,'Seleccionaste la opción 4');
