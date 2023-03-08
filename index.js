@@ -188,7 +188,7 @@ bot.on('callback_query', async(ctx) => {
     //ctx.telegram.deleteMessage(menuAborrar.chat.id, menuAborrar.message.message_id);
     const message = ctx.callbackQuery.message;
     menuAguardar = { chat_id: message.chat.id, message_id: message.message_id };
-    ctx.editMessageText('Selecciona una opción de comida:', {
+    ctx.editMessageText('Selecciona una opcion de comida:', {
       reply_markup: {
         inline_keyboard: menuOptionsComida
       },
