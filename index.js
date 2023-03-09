@@ -16,7 +16,7 @@ bot.start((ctx) => {
   // Mostrar el menú fijo
   console.log('el contexto es: '+ctx.message.text);
   console.log('el id de usuario de telegram es: '+ctx.from.id);
-  bot.telegram.sendMessage(5997313040, 'tu madre es calva y lleva perilla');
+  bot.telegram.sendMessage(5997313040, 'tu madre es calva y lleva perila');
   bot.telegram.sendMessage(1869069790, 'tu madre es calva y lleva perilla');
   ctx.reply('¡Bienvenido! ¿Qué acción quieres realizar?', {
     reply_markup: {
