@@ -12,8 +12,9 @@ const staticMenu = [
 
 
 // Comando para iniciar la conversación
-bot.start(async (ctx) => {
+bot.start((ctx) => {
   // Mostrar el menú fijo
+  console.log('el contexto es: '+ctx.message.text);
   ctx.reply('¡Bienvenido! ¿Qué acción quieres realizar?', {
     reply_markup: {
       keyboard: staticMenu,
@@ -171,19 +172,21 @@ let mensajeAnterior = null;
 
 //modifica el mensaje si previamente se ha escrito uno, sino se hara el reply
 async function ctxReply(ctx, nuevoTexto) {
+  const ctxActual = ctx.callbackQuery.message.message_id;
   //ver si es un contexto nuevo o el mismo que el que se estaba pasando
   console.log(ctx.callbackQuery.message.message_id);
   console.log('el mensaje anterior es: '+mensajeAnterior);
   if(mensajeAnterior) {
-    try {
-      if(nuevoTexto !==  mensajeAnterior.text) {
-        //await ctx.telegram.deleteMessage(mensajeAnterior.chat_id, mensajeAnterior.message_id);
-        await ctx.telegram.editMessageText(mensajeAnterior.chat_id, mensajeAnterior.message_id, null, nuevoTexto);
-        mensajeAnterior.text = nuevoTexto;
+      try {
+        if(nuevoTexto !==  mensajeAnterior.text) {
+          //await ctx.telegram.deleteMessage(mensajeAnterior.chat_id, mensajeAnterior.message_id);
+          await ctx.telegram.editMessageText(mensajeAnterior.chat_id, mensajeAnterior.message_id, null, nuevoTexto);
+          mensajeAnterior.text = nuevoTexto;
+        }
+      } catch (error) {
+        console.log('Error al eliminar el mensaje anerior:', error);
       }
-    } catch (error) {
-      console.log('Error al eliminar el mensaje anerior:', error);
-    }
+
   } else {
     ctx.reply(nuevoTexto).then((ctxResponse) => {
       mensajeAnterior = {chat_id: ctxResponse.chat.id, message_id: ctxResponse.message_id, text: ctxResponse.text};
