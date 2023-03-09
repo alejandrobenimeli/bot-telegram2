@@ -116,6 +116,7 @@ bot.command('menu', (ctx) => {
     }
   });
   */
+  /*
   if (menuAguardar) {
    // Si ya se mostró el menú antes, se muestra el mensaje guardado
    ctx.telegram.editMessageText(
@@ -125,10 +126,10 @@ bot.command('menu', (ctx) => {
      'Selecciona una opción:',
      Markup.inlineKeyboard(menuOptions)
    );
- } else {
+ } else { */
    // Si es la primera vez que se muestra el menú, se envía un mensaje nuevo
    ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuOptions));
- }
+ //}
 });
 
 
