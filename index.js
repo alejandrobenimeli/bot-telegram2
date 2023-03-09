@@ -172,7 +172,8 @@ let mensajeAnterior = null;
 //modifica el mensaje si previamente se ha escrito uno, sino se hara el reply
 async function ctxReply(ctx, nuevoTexto) {
   //ver si es un contexto nuevo o el mismo que el que se estaba pasando
-  console.log(ctx.callbackQuery);
+  console.log(ctx.callbackQuery.message.message_id);
+  console.log('el mensaje anterior es: '+mensajeAnterior);
   if(mensajeAnterior) {
     try {
       if(nuevoTexto !==  mensajeAnterior.text) {
