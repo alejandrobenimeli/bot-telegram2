@@ -15,6 +15,7 @@ const staticMenu = [
 bot.start((ctx) => {
   // Mostrar el menú fijo
   console.log('el contexto es: '+ctx.message.text);
+  console.log('el id de usuario de telegram es: '+ctx.from.id);
   ctx.reply('¡Bienvenido! ¿Qué acción quieres realizar?', {
     reply_markup: {
       keyboard: staticMenu,
