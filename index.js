@@ -14,7 +14,14 @@ const staticMenu = [
 // Comando para iniciar la conversación
 bot.start((ctx) => {
   // Mostrar el menú fijo
-  console.log('el contexto es: '+ctx.message.text);
+  const userRef = ctx.message.text.split(' ')[1];
+  if(userRef) {
+    console.log('el contexto es: '+userRef);
+    console.log('tiene un ususario referido');
+  } else {
+    console.log('no hay ningun usuario referido');
+  }
+
   console.log('el id de usuario de telegram es: '+ctx.from.id);
   bot.telegram.sendMessage(5997313040, 'tu madre es calva y lleva perila');
   bot.telegram.sendMessage(1869069790, 'tu madre es calva y lleva perilla');
@@ -25,22 +32,6 @@ bot.start((ctx) => {
       selective: true
     }
   });
-/*
-  const userId = ctx.from.id
-
-  const userProfilePhotos = await ctx.telegram.getUserProfilePhotos(userId)
-  const profilePhotos = userProfilePhotos.photos
-
-  if (profilePhotos.length === 0) {
-    return ctx.reply('No se encontró ningún número de teléfono asociado con su cuenta de Telegram.')
-  }
-
-  const fileId = profilePhotos[0][0].file_id
-  const file = await ctx.telegram.getFile(fileId)
-  const phoneNumber = file.file_path.split('_')[1]
-
-  ctx.reply(`Tu número de teléfono en Telegram es: ${phoneNumber}`)
-  */
 });
 
 // Manejador de eventos para el botón "Ver lista de productos"
@@ -248,36 +239,7 @@ bot.on('callback_query', async(ctx) => {
     ctx.reply('¡Hola! Soy un bot de Telegram.');
   });*/
 
-  // Manejador del comando /menu
-/*
-bot.command('hola', (ctx) => {
-  // Enviar un mensaje al chat del usuario con un menú inline_keyboard
-  ctx.reply('Selecciona una opción:', {
-    reply_markup: {
-      inline_keyboard: [
-        [
-          { text: 'Opcion 1', callback_data: 'opcion_1' },
-          { text: 'Opción 2', callback_data: 'opcion_2' },
-        ],
-      ],
-    },
-  }).then((menuMessage) => {
-    // Guardar el ID del mensaje con el menú para actualizarlo más tarde
-    const menuMessageId = menuMessage.message_id;
 
-    // Manejador de la opción 1 del menú
-    bot.action('opcion_1', (ctx) => {
-      // Actualizar el mensaje original con la respuesta
-      ctx.editMessageText('La opción 1 ha sido seleccionada.');
-    });
-
-    // Manejador de la opción 2 del menú
-    bot.action('opcion_2', (ctx) => {
-      // Actualizar el mensaje original con la respuesta
-      ctx.editMessageText('La opción 2 ha sido seleccionada.');
-    });
-  });
-}); */
 
 
 //elimina el ultimo mensaje y escribe el nuevo mensaje
