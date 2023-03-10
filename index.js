@@ -11,13 +11,24 @@ const staticMenu = [
 ];
 
 
+const idUserRegex = /\d{10}/;
+
+function validarIdUser(idUser) {
+  return idUserRegex.test(idUser);
+}
+
 // Comando para iniciar la conversación
 bot.start((ctx) => {
   // Mostrar el menú fijo
+  //Tiene un usuario referido
   const userRef = ctx.message.text.split(' ')[1];
   if(userRef) {
-    console.log('el contexto es: '+userRef);
-    console.log('tiene un ususario referido');
+    if(validarIdUser(userRef)) {
+      console.log('el contexto es: '+userRef);
+      console.log('tiene un ususario referido');
+    } else {
+      console.log('no tiene el id de user correcto');
+    }
   } else {
     console.log('no hay ningun usuario referido');
   }
