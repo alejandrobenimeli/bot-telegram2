@@ -7,7 +7,7 @@ let previousMessageId;
 // Menú fijo
 const staticMenu = [
   [{ text: '🎂 Ver lista de productos' }, { text: 'Buscar producto' }],
-  [{ text: 'Añadir producto al carrito' }, { text: 'Ver carrito de compras' }]
+  [{ text: 'Añadir producto al carrito' }, { text: 'Afiliado' }]
 ];
 
 
@@ -22,15 +22,18 @@ bot.start((ctx) => {
   // Mostrar el menú fijo
   //Tiene un usuario referido
   const userRef = ctx.message.text.split(' ')[1];
+  const userId = ctx.message.from.id;
   if(userRef) {
     if(validarIdUser(userRef)) {
       console.log('el contexto es: '+userRef);
-      console.log('tiene un ususario referido');
+      console.log('el user id: '+userId);
+      console.log('tiene un usuario referido');
     } else {
       console.log('no tiene el id de user correcto');
     }
   } else {
     console.log('no hay ningun usuario referido');
+    console.log('el user id: '+userId);
   }
 
   console.log('el id de usuario de telegram es: '+ctx.from.id);
@@ -69,7 +72,7 @@ bot.hears('Añadir producto al carrito', (ctx) => {
 });
 
 // Manejador de eventos para el botón "Ver carrito de compras"
-bot.hears('Ver carrito de compras', (ctx) => {
+bot.hears('Afiliado', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
   ctx.reply('Aquí está tu carrito de compras:');
   // ...
