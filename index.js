@@ -26,9 +26,9 @@ bot.start(async(ctx) => {
   if(userRef) {
     if(validarFormatoIdUser(userRef)) {
       try {
-         const user = await ctx.telegram.getChatMember('user', userRef);
+         const user = await ctx.telegram.getUser(userRef);
          console.log(user);
-         ctx.reply(`${user.user.first_name} existe en Telegram el user referido`);
+         ctx.reply(`${user.first_name} existe en Telegram el user referido`);
          console.log('el usuario referido es: '+userRef);
          console.log('el user id: '+userId);
          console.log('tiene un usuario referido');
