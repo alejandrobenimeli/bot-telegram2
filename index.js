@@ -18,17 +18,23 @@ function validarFormatoIdUser(idUser) {
 }
 
 // Comando para iniciar la conversación
-bot.start(async(ctx) => {
+bot.start((ctx) => {
   // Mostrar el menú fijo
   //Tiene un usuario referido
   const userRef = ctx.message.text.split(' ')[1];
-  const userId = ctx.message.from.id;
+  const userId = {userid: ctx.message.from.id, name: ctx.message.first_name};
   if(userRef) {
     if(validarFormatoIdUser(userRef)) {
       try {
+        //aqui comprobar que el userRef exista como userRef (tabla referidos)
+        //si existe userRef, guardar en tabla usuarios el userId.
+        // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
+
+        /*
          const user = await ctx.telegram.getChat(userRef);
          console.log(user);
          ctx.reply(`${user.first_name} existe en Telegram el user referido`);
+         */
          console.log('el usuario referido es: '+userRef);
          console.log('el user id: '+userId);
          console.log('tiene un usuario referido');
@@ -42,6 +48,8 @@ bot.start(async(ctx) => {
   } else {
     console.log('no hay ningun usuario referido');
     console.log('el user id: '+userId);
+    //comprobar si existe en la base de datos como userRef o userId. si existe no hacer nada. si no existse
+    //guardar el userid vacio sin referidos en la bd como userRef (tabla referidos)
   }
 
   //console.log('el id de usuario de telegram es: '+ctx.from.id);
