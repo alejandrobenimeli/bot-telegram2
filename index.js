@@ -18,7 +18,7 @@ function validarFormatoIdUser(idUser) {
 }
 
 // Comando para iniciar la conversación
-bot.start((ctx) => {
+bot.start(async(ctx) => {
   // Mostrar el menú fijo
   //Tiene un usuario referido
   const userRef = ctx.message.text.split(' ')[1];
