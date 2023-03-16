@@ -33,7 +33,7 @@ bot.start(async(ctx) => {
          console.log('el user id: '+userId);
          console.log('tiene un usuario referido');
       } catch (error) {
-         console.log(error;
+         console.log(error);
          console.log('No se pudo encontrar el usuario');
       }
     } else {
