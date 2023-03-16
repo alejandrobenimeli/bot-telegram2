@@ -13,7 +13,7 @@ const staticMenu = [
 
 const idUserRegex = /\d{10}/;
 
-function validarIdUser(idUser) {
+function validarFormatoIdUser(idUser) {
   return idUserRegex.test(idUser);
 }
 
@@ -24,10 +24,18 @@ bot.start((ctx) => {
   const userRef = ctx.message.text.split(' ')[1];
   const userId = ctx.message.from.id;
   if(userRef) {
-    if(validarIdUser(userRef)) {
-      console.log('el contexto es: '+userRef);
-      console.log('el user id: '+userId);
-      console.log('tiene un usuario referido');
+    if(validarFormatoIdUser(userRef)) {
+      try {
+         const user = await ctx.telegram.getChatMember('user', userRef);
+         console.log(user);
+         ctx.reply(`${user.user.first_name} existe en Telegram el user referido`);
+         console.log('el usuario referido es: '+userRef);
+         console.log('el user id: '+userId);
+         console.log('tiene un usuario referido');
+      } catch (error) {
+         console.log(error;
+         console.log('No se pudo encontrar el usuario');
+      }
     } else {
       console.log('no tiene el id de user correcto');
     }
@@ -36,7 +44,7 @@ bot.start((ctx) => {
     console.log('el user id: '+userId);
   }
 
-  console.log('el id de usuario de telegram es: '+ctx.from.id);
+  //console.log('el id de usuario de telegram es: '+ctx.from.id);
   bot.telegram.sendMessage(5997313040, 'tu madre es calva y lleva perila');
   bot.telegram.sendMessage(1869069790, 'tu madre es calva y lleva perilla');
   ctx.reply('¡Bienvenido! ¿Qué acción quieres realizar?', {
