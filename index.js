@@ -19,6 +19,24 @@ function validarFormatoIdUser(idUser) {
   return idUserRegex.test(idUser);
 }
 
+function peticionGet(endPoint) {
+  // Realizar la petición GET
+  https.get(endPoint, (res) => {
+    let data = '';
+    res.on('data', (chunk) => {
+      data += chunk;
+    });
+    res.on('end', () => {
+      // Convertir la respuesta a un objeto JSON
+      const json = JSON.parse(data);
+      return json;
+    });
+  }).on('error', (err) => {
+    console.error(`Error al hacer la petición: ${err.message}`);
+    return -1;
+  });
+}
+
 // Comando para iniciar la conversación
 bot.start((ctx) => {
   // Mostrar el menú fijo
@@ -31,28 +49,8 @@ bot.start((ctx) => {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
         const endPoint_comprobarUserRef = 'https://seofy.es/api/exists_user_ref/'+tokenEnPoint+'/'+userRef;
-        // Realizar la petición GET
-        https.get(endPoint_comprobarUserRef, (res) => {
-          let data = '';
-          res.on('data', (chunk) => {
-            data += chunk;
-          });
-          res.on('end', () => {
-            // Convertir la respuesta a un objeto JSON
-            const json = JSON.parse(data);
-
-            // Procesar el objeto JSON
-            // json.forEach((post) => {
-            //   console.log(`ID: ${post.id}`);
-            //   console.log(`Título: ${post.title}`);
-            //   console.log(`Contenido: ${post.body}`);
-            //   console.log('------------------');
-            // });
-            console.log('la data de la funcion end es: '+json.existe);
-          });
-        }).on('error', (err) => {
-          console.error(`Error al hacer la petición: ${err.message}`);
-        });
+        const json = peticionGet(endPoint_comprobarUserRef);
+        console.log('el resultado es '+ json.existe);
         //si existe userRef, guardar en tabla usuarios el userId.
         // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
 
