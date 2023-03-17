@@ -26,11 +26,14 @@ function peticionGet(endPoint) {
   return new Promise((resolve, reject) => {
     https.get(endPoint, (res) => {
       let data = '';
+      console.log('entra en 1');
       res.on('data', (chunk) => {
         data += chunk;
+        console.log('entra en 2');
       });
       res.on('end', () => {
         const json = JSON.parse(data);
+        console.log('entra en 3');
         resolve(json);
       });
     }).on('error', (err) => {
