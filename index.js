@@ -30,7 +30,7 @@ bot.start((ctx) => {
     if(validarFormatoIdUser(userRef)) {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
-        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists_user_ref/${tokenEnPoint}/${userRef}';
+        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists_user_ref/'+tokenEnPoint+'/'+userRef;
         // Realizar la petición GET
         https.get(endPoint_comprobarUserRef, (res) => {
           let data = '';
