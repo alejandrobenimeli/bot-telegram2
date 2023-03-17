@@ -1,5 +1,5 @@
 const { Telegraf, Markup } = require('telegraf');
-const https = require('https');
+
 
 const bot = new Telegraf(process.env.TOKEN)
 const tokenEnPoint = 'abl248924';
@@ -21,6 +21,7 @@ function validarFormatoIdUser(idUser) {
 
 function peticionGet(endPoint) {
   // Realizar la petición GET
+  const https = require('https');
   console.log('la url es '+endPoint);
   return new Promise((resolve, reject) => {
     https.get(endPoint, (res) => {
