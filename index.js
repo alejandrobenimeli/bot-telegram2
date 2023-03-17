@@ -34,14 +34,12 @@ bot.start((ctx) => {
         // Realizar la petición GET
         https.get(endPoint_comprobarUserRef, (res) => {
           let data = '';
-          console.log('la url es '+endPoint_comprobarUserRef);
           res.on('data', (chunk) => {
             data += chunk;
-            console.log('la data de la funcion data es:'+data);
           });
           res.on('end', () => {
             // Convertir la respuesta a un objeto JSON
-            //const json = JSON.parse(data);
+            const json = JSON.parse(data);
 
             // Procesar el objeto JSON
             // json.forEach((post) => {
@@ -50,7 +48,7 @@ bot.start((ctx) => {
             //   console.log(`Contenido: ${post.body}`);
             //   console.log('------------------');
             // });
-            console.log('la data de la funcion end es: '+data);
+            console.log('la data de la funcion end es: '+json.existe);
           });
         }).on('error', (err) => {
           console.error(`Error al hacer la petición: ${err.message}`);
