@@ -47,7 +47,7 @@ bot.start((ctx) => {
     }
   } else {
     console.log('no hay ningun usuario referido');
-    console.log('el user id: '+userId);
+    console.log('el user id: '+userId.userid+' , el name: '+userId.name);
     //comprobar si existe en la base de datos como userRef o userId. si existe no hacer nada. si no existse
     //guardar el userid vacio sin referidos en la bd como userRef (tabla referidos)
   }
