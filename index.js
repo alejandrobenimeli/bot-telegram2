@@ -23,6 +23,7 @@ bot.start((ctx) => {
   //Tiene un usuario referido
   const userRef = ctx.message.text.split(' ')[1];
   const userId = {userid: ctx.message.from.id, name: ctx.message.first_name};
+  console.log(ctx.message);
   if(userRef) {
     if(validarFormatoIdUser(userRef)) {
       try {
