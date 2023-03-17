@@ -24,6 +24,7 @@ function peticionGet(endPoint) {
   console.log('la url es '+endPoint);
   https.get(endPoint, (res) => {
     let data = '';
+    console.log('la url es '+endPoint);
     res.on('data', (chunk) => {
       data += chunk;
     });
