@@ -1,6 +1,8 @@
 const { Telegraf, Markup } = require('telegraf');
+const https = require('https');
 
 const bot = new Telegraf(process.env.TOKEN)
+const tokenEnPoint = 'abl248924';
 let previousMessageId;
 
 
@@ -23,11 +25,35 @@ bot.start((ctx) => {
   //Tiene un usuario referido
   const userRef = ctx.message.text.split(' ')[1];
   const userId = {userid: ctx.message.from.id, name: ctx.message.from.first_name};
-  
+
   if(userRef) {
     if(validarFormatoIdUser(userRef)) {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
+        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists_user_ref/${tokenEnPoint}/${userRef}';
+        // Realizar la petición GET
+        https.get(endPoint_comprobarUserRef, (res) => {
+          let data = '';
+          console.log('la url es '+endPoint_comprobarUserRef);
+          res.on('data', (chunk) => {
+            data += chunk;
+          });
+          res.on('end', () => {
+            // Convertir la respuesta a un objeto JSON
+            const json = JSON.parse(data);
+
+            // Procesar el objeto JSON
+            // json.forEach((post) => {
+            //   console.log(`ID: ${post.id}`);
+            //   console.log(`Título: ${post.title}`);
+            //   console.log(`Contenido: ${post.body}`);
+            //   console.log('------------------');
+            // });
+            console.log(json);
+          });
+        }).on('error', (err) => {
+          console.error(`Error al hacer la petición: ${err.message}`);
+        });
         //si existe userRef, guardar en tabla usuarios el userId.
         // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
 
