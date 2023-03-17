@@ -21,6 +21,7 @@ function validarFormatoIdUser(idUser) {
 
 function peticionGet(endPoint) {
   // Realizar la petición GET
+  console.log('la url es '+endPoint);
   https.get(endPoint, (res) => {
     let data = '';
     res.on('data', (chunk) => {
@@ -29,6 +30,7 @@ function peticionGet(endPoint) {
     res.on('end', () => {
       // Convertir la respuesta a un objeto JSON
       const json = JSON.parse(data);
+      console.log('hola '+ json);
       return json;
     });
   }).on('error', (err) => {
