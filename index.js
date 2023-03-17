@@ -37,7 +37,7 @@ bot.start((ctx) => {
           console.log('la url es '+endPoint_comprobarUserRef);
           res.on('data', (chunk) => {
             data += chunk;
-            console.log(data);
+            console.log('la data de la funcion data es:'+data);
           });
           res.on('end', () => {
             // Convertir la respuesta a un objeto JSON
@@ -50,7 +50,7 @@ bot.start((ctx) => {
             //   console.log(`Contenido: ${post.body}`);
             //   console.log('------------------');
             // });
-            console.log(data);
+            console.log('la data de la funcion end es: '+data);
           });
         }).on('error', (err) => {
           console.error(`Error al hacer la petición: ${err.message}`);
