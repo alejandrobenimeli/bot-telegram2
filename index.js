@@ -22,21 +22,19 @@ function validarFormatoIdUser(idUser) {
 function peticionGet(endPoint) {
   // Realizar la petición GET
   console.log('la url es '+endPoint);
-  https.get(endPoint, (res) => {
-    let data = '';
-    console.log('la url es '+endPoint);
-    res.on('data', (chunk) => {
-      data += chunk;
+  return new Promise((resolve, reject) => {
+    https.get(endPoint, (res) => {
+      let data = '';
+      res.on('data', (chunk) => {
+        data += chunk;
+      });
+      res.on('end', () => {
+        const json = JSON.parse(data);
+        resolve(json);
+      });
+    }).on('error', (err) => {
+      reject(err);
     });
-    res.on('end', () => {
-      // Convertir la respuesta a un objeto JSON
-      const json = JSON.parse(data);
-      console.log('hola '+ json);
-      return json;
-    });
-  }).on('error', (err) => {
-    console.error(`Error al hacer la petición: ${err.message}`);
-    return -1;
   });
 }
 
