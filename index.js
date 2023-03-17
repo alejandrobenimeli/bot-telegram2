@@ -33,7 +33,7 @@ function peticionGet(endPoint) {
       });
       res.on('end', () => {
         const json = JSON.parse(data);
-        console.log('entra en 3');
+        console.log('entra en 3:'+json);
         resolve(json);
       });
     }).on('error', (err) => {
