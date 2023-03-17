@@ -37,6 +37,7 @@ bot.start((ctx) => {
           console.log('la url es '+endPoint_comprobarUserRef);
           res.on('data', (chunk) => {
             data += chunk;
+            console.log(data);
           });
           res.on('end', () => {
             // Convertir la respuesta a un objeto JSON
