@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const bot = new Telegraf(process.env.TOKEN);
 
-const tokenEnPoint = 'abl248924';
+const tokenEnPoint = process.env.TOKEN_EN_POINT; //'abl248924';
 let previousMessageId;
 
 
@@ -63,10 +63,11 @@ bot.start((ctx) => {
             })
             .then(response => {
               console.log(response.data);
-              //aqui notificar al userRef de que tiene un nuevo usuario si error = 0
+              //aqui notificar al userRef de que tiene un nuevo usuario referido si error = 0
               jsonResponse = response.data;
               if(jsonResponse.error === 0) {
                 console.log('todo correcto');
+                bot.telegram.sendMessage(userRef, 'Enhorabuena! Tiene un nuevo referido, name: ${nameUser} e id: ${idUser}');
               } else {
                 console.log('salio mal');
               }
