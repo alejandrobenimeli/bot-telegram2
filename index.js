@@ -49,7 +49,12 @@ bot.start((ctx) => {
         .then((response) => {
           if(response.existe) {
             console.log('existe la id del referido');
-            axios.post('https://seofy.es/api/guardar-userd', {
+            console.log(`token: ${tokenEnPoint}`);
+console.log(`idUser: ${userId.userid}`);
+console.log(`nameUser: ${userId.name}`);
+console.log('idRef: '+userRef);
+
+            axios.post('https://seofy.es/api/guardar-userid', {
               token: tokenEnPoint,
               idUser: userId.userid,
               nameUser: userId.name,
