@@ -56,10 +56,13 @@ bot.start((ctx) => {
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
           existeReferido = response.existe;
+          console.log(response.existe);
+          console.log('existeReferido dentro:'+existeReferido);
         })
         .catch((error) => {
           console.error('error'+error);
         });
+        console.log('existeReferido fuera:'+existeReferido);
         if(existeReferido == 1) {
           console.log('existe el id de referido');
         } else {
