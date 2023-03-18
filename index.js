@@ -61,6 +61,7 @@ bot.start((ctx) => {
             .catch(error => {
               console.log(error); // imprimir el error en caso de que la petición falle
             });
+            console.log('Petición POST en proceso...'); 
           } else {
             console.log('NO existe la id del referido');
           }
