@@ -54,8 +54,15 @@ bot.start((ctx) => {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
         const endPoint_comprobarUserRef = 'https://seofy.es/api/exists_user_ref/'+tokenEnPoint+'/'+userRef;
-        const json = peticionGet(endPoint_comprobarUserRef);
-        console.log('el resultado es '+ json.existe);
+        //const json = peticionGet(endPoint_comprobarUserRef);
+        //console.log('el resultado es '+ json.existe);
+        peticionGet(endPoint_comprobarUserRef)
+        .then((response) => {
+          console.log('hola:'+response);
+        })
+        .catch((error) => {
+          console.error('error'+error);
+        });
         //si existe userRef, guardar en tabla usuarios el userId.
         // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
 
