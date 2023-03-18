@@ -15,7 +15,7 @@ const staticMenu = [
 ];
 
 
-const idUserRegex = /\d{10}/;
+const idUserRegex = '^\d{10}$';
 
 function validarFormatoIdUser(idUser) {
   return idUserRegex.test(idUser);
