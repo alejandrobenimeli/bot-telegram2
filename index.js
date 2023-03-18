@@ -60,7 +60,7 @@ bot.start((ctx) => {
         .catch((error) => {
           console.error('error'+error);
         });
-        if(existeReferido) {
+        if(existeReferido == 1) {
           console.log('existe el id de referido');
         } else {
           console.log('NO existe el id de referido');
