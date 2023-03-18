@@ -99,11 +99,35 @@ bot.start((ctx) => {
     //comprobar si existe en la base de datos como userRef o userId. si existe no hacer nada. si no existse
     //guardar el userid vacio sin referidos en la bd como userRef (tabla referidos)
     const endPoint_comprobarUser = 'https://seofy.es/api/exists-user-id/'+tokenEnPoint+'/'+userId.userid;
-    //console.log('la url: '+endPoint_comprobarUser);
     peticionGet(endPoint_comprobarUser)
     .then((response) => {
       console.log('la respuesta sin referido es: ');
-      console.log(response.existe);
+      if(response.existe === 0) {
+        //GUARDAR EN LA TABLA referidos
+        axios.post('https://seofy.es/api/guardar-userref', {
+          token: tokenEnPoint,
+          idUser: userId.userid,
+          nameUser: userId.name
+        }, {
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+          jsonResponse = response.data;
+          if(jsonResponse.error === 0) {
+            console.log('Registro insertado correctamente');
+            //bot.telegram.sendMessage(userRef, `¡Enhorabuena! Tiene un nuevo referido, NAME: ${userId.name} e ID: ${userId.userid}`);
+          } else {
+            console.log('No se pudo insertar el registro');
+          }
+
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
     })
     .catch((error) => {
       console.error('error: '+error);
