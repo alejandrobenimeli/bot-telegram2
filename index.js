@@ -49,7 +49,7 @@ bot.start((ctx) => {
         .then((response) => {
           if(response.existe) {
             console.log('existe la id del referido');
-            axios.post('https://seofy.es/api/guardar-userid', {
+            axios.post('https://seofy.es/api/guardar-userd', {
               token: tokenEnPoint,
               idUser: userId.userid,
               nameUser: userId.name,
@@ -61,7 +61,7 @@ bot.start((ctx) => {
             .catch(error => {
               console.log(error); // imprimir el error en caso de que la petición falle
             });
-            console.log('Petición POST en proceso...'); 
+            console.log('Petición POST en proceso...');
           } else {
             console.log('NO existe la id del referido');
           }
