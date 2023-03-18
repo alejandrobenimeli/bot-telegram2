@@ -99,6 +99,7 @@ bot.start((ctx) => {
     //comprobar si existe en la base de datos como userRef o userId. si existe no hacer nada. si no existse
     //guardar el userid vacio sin referidos en la bd como userRef (tabla referidos)
     const endPoint_comprobarUser = 'https://seofy.es/api/exists-user-id/'+tokenEnPoint+'/'+userId.userid;
+    console.log('la url es: '+endPoint_comprobarUser);
     peticionGet(endPoint_comprobarUser)
     .then((response) => {
       console.log('la respuesta sin referido es: ');
@@ -125,12 +126,12 @@ bot.start((ctx) => {
 
         })
         .catch(error => {
-          console.log(error);
+          console.log('error puta1:'+error);
         });
       }
     })
     .catch((error) => {
-      console.error('error: '+error);
+      console.error('error puta2: '+error);
     });
   }
 
