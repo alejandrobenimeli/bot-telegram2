@@ -26,10 +26,9 @@ function peticionGet(endPoint) {
   return new Promise((resolve, reject) => {
     https.get(endPoint, (res) => {
       let data = '';
-      console.log('entra en 1');
       res.on('data', (chunk) => {
         data += chunk;
-        console.log('entra en 2');
+        console.log('entra en 2'+data);
       });
       res.on('end', () => {
         const json = JSON.parse(data);
@@ -58,7 +57,8 @@ bot.start((ctx) => {
         //console.log('el resultado es '+ json.existe);
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
-          console.log('hola:'+response);
+          console.log('hola:');
+          console.log(response);
         })
         .catch((error) => {
           console.error('error'+error);
@@ -72,7 +72,8 @@ bot.start((ctx) => {
          ctx.reply(`${user.first_name} existe en Telegram el user referido`);
          */
          console.log('el usuario referido es: '+userRef);
-         console.log('el user id: '+userId);
+         console.log('el user id: ');
+         console.log(userId);
          console.log('tiene un usuario referido');
       } catch (error) {
          console.log(error);
