@@ -1,8 +1,9 @@
 const { Telegraf, Markup } = require('telegraf');
+const axios = require('axios');
 
 
 const bot = new Telegraf(process.env.TOKEN);
-const https = require('https');
+//const https = require('https');
 
 const tokenEnPoint = 'abl248924';
 let previousMessageId;
@@ -21,9 +22,9 @@ function validarFormatoIdUser(idUser) {
   return idUserRegex.test(idUser);
 }
 
+/*
 function peticionGet(endPoint) {
   // Realizar la petición GET
-  //console.log('la url es '+endPoint);
   return new Promise((resolve, reject) => {
     https.get(endPoint, (res) => {
       let data = '';
@@ -38,6 +39,18 @@ function peticionGet(endPoint) {
       reject(err);
     });
   });
+} */
+
+function peticionGet(endPoint) {
+  // Realizar la petición GET
+  return axios.get(endPoint)
+    .then((response) => {
+      const json = response.data;
+      return Promise.resolve(json);
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
 }
 
 // Comando para iniciar la conversación
@@ -51,7 +64,7 @@ bot.start((ctx) => {
     if(validarFormatoIdUser(userRef)) {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
-        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists_user_ref/'+tokenEnPoint+'/'+userRef;
+        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+userRef;
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
           if(response.existe) {
