@@ -67,7 +67,7 @@ bot.start((ctx) => {
               jsonResponse = response.data;
               if(jsonResponse.error === 0) {
                 console.log('todo correcto');
-                bot.telegram.sendMessage(userRef, `Enhorabuena! Tiene un nuevo referido, name: ${userId.name} e id: ${userId.userid}`);
+                bot.telegram.sendMessage(userRef, `Enhorabuena! Tiene un <b>nuevo</b> referido, name: ${userId.name} e id: ${userId.userid}`, {parse_mode: 'HTML'});
               } else {
                 console.log('salio mal');
               }
@@ -78,6 +78,7 @@ bot.start((ctx) => {
             });
           } else {
             console.log('NO existe la id del referido');
+            bot.telegram.sendMessage(userId.userid, 'No se te asocio a ningún referido, ya que el referido no existe');
           }
         })
         .catch((error) => {
@@ -96,6 +97,7 @@ bot.start((ctx) => {
       }
     } else {
       console.log('no tiene el id de user correcto');
+      bot.telegram.sendMessage(userId.userid, 'No se te asocio a ningún referido, ya que el formato introducido es incorrecto');
     }
   } else {
     console.log('no hay ningun usuario referido');
