@@ -46,6 +46,8 @@ function peticionGet(endPoint) {
   return axios.get(endPoint)
     .then((response) => {
       const json = response.data;
+      console.log('se mete aqui1:');
+      console.log(json);
       return Promise.resolve(json);
     })
     .catch((err) => {
@@ -67,6 +69,7 @@ bot.start((ctx) => {
         const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+userRef;
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
+          console.log('la respuesta es: '+response.existe);
           if(response.existe) {
             console.log('existe la id del referido');
           } else {
