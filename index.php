@@ -81,6 +81,10 @@ Flight::route('GET /exists-user-id/@token/@iduser', function ($token,$iduser) {
 //GUARDA A LA VEZ EL USERID EN LA TABLA USUARIOS Y LA ASOCIACION DE USERREF Y USERID EN LA TABLA DE ASOCIACION
 Flight::route('POST /guardar-userid', function(){
   // Obtener las variables por POST
+  //var_dump($_POST); // imprimir el contenido del array $_POST para verificar que se está recibiendo el token
+//$token = $_POST['token'];
+//var_dump($token);
+  /*
   $token = $_POST['token'];
   $json = array(
     'error' => 0,
@@ -88,7 +92,11 @@ Flight::route('POST /guardar-userid', function(){
     'token' => TOKEN,
     'token2' => $token
   );
-  Flight::json($json);
+  Flight::json($_POST);
+*/
+header('Content-Type: application/json');
+//echo json_encode($_POST);
+Flight::json($_POST);
 
   if($token == TOKEN) {
     $idUser = $_POST['idUser'];
