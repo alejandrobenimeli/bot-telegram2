@@ -54,6 +54,10 @@ bot.start((ctx) => {
               idUser: userId.userid,
               nameUser: userId.name,
               idRef: userRef
+            }, {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }
             })
             .then(response => {
               console.log(response.data); // imprimir la respuesta del servidor
