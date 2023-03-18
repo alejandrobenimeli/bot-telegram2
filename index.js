@@ -45,7 +45,6 @@ bot.start((ctx) => {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
         const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+userRef;
-        console.log('url: '+ endPoint_comprobarUserRef);
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
           if(response.existe) {
@@ -68,7 +67,7 @@ bot.start((ctx) => {
               jsonResponse = response.data;
               if(jsonResponse.error === 0) {
                 console.log('todo correcto');
-                bot.telegram.sendMessage(userRef, 'Enhorabuena! Tiene un nuevo referido, name: ${nameUser} e id: ${idUser}');
+                bot.telegram.sendMessage(userRef, `Enhorabuena! Tiene un nuevo referido, name: ${nameUser} e id: ${idUser}`);
               } else {
                 console.log('salio mal');
               }
@@ -106,7 +105,7 @@ bot.start((ctx) => {
   }
 
   //console.log('el id de usuario de telegram es: '+ctx.from.id);
-  bot.telegram.sendMessage(5997313040, 'tu madre es calva y lleva perila');
+  //bot.telegram.sendMessage(5997313040, 'tu madre es calva y lleva perila');
   //bot.telegram.sendMessage(1869069790, 'tu madre es calva y lleva perilla');
   ctx.reply('¡Bienvenido! ¿Qué acción quieres realizar?', {
     reply_markup: {
