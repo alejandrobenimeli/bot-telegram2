@@ -115,10 +115,11 @@ bot.start((ctx) => {
           }
         })
         .then(response => {
-          console.log(response.data);
+          //console.log(response.data);
           jsonResponse = response.data;
+          console.log(jsonResponse);
           if(jsonResponse.error === 0) {
-            console.log('Registro insertado correctamente');
+            console.log(jsonResponse.msg);
             //bot.telegram.sendMessage(userRef, `¡Enhorabuena! Tiene un nuevo referido, NAME: ${userId.name} e ID: ${userId.userid}`);
           } else {
             console.log('No se pudo insertar el registro');
@@ -126,12 +127,12 @@ bot.start((ctx) => {
 
         })
         .catch(error => {
-          console.log('error puta1:'+error);
+          console.log('error nivel1:'+error);
         });
       }
     })
     .catch((error) => {
-      console.error('error puta2: '+error);
+      console.error('error nivel2: '+error);
     });
   }
 
