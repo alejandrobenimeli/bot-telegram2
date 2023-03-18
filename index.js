@@ -3,7 +3,6 @@ const axios = require('axios');
 
 
 const bot = new Telegraf(process.env.TOKEN);
-//const https = require('https');
 
 const tokenEnPoint = 'abl248924';
 let previousMessageId;
@@ -22,32 +21,11 @@ function validarFormatoIdUser(idUser) {
   return idUserRegex.test(idUser);
 }
 
-/*
-function peticionGet(endPoint) {
-  // Realizar la petición GET
-  return new Promise((resolve, reject) => {
-    https.get(endPoint, (res) => {
-      let data = '';
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
-      res.on('end', () => {
-        const json = JSON.parse(data);
-        resolve(json);
-      });
-    }).on('error', (err) => {
-      reject(err);
-    });
-  });
-} */
-
 function peticionGet(endPoint) {
   // Realizar la petición GET
   return axios.get(endPoint)
     .then((response) => {
       const json = response.data;
-      console.log('se mete aqui1:');
-      console.log(json);
       return Promise.resolve(json);
     })
     .catch((err) => {
@@ -67,12 +45,22 @@ bot.start((ctx) => {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
         const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+userRef;
-        console.log('url: '+endPoint_comprobarUserRef);
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
-          console.log('la respuesta es: '+response.existe);
           if(response.existe) {
             console.log('existe la id del referido');
+            axios.post('https://seofy.es/api/guardar-userid', {
+              token: tokenEnPoint,
+              idUser: userId.userid,
+              nameUser: userId.name,
+              idRef: userRef
+            })
+            .then(response => {
+              console.log(response.data); // imprimir la respuesta del servidor
+            })
+            .catch(error => {
+              console.log(error); // imprimir el error en caso de que la petición falle
+            });
           } else {
             console.log('NO existe la id del referido');
           }
