@@ -51,23 +51,20 @@ bot.start((ctx) => {
     if(validarFormatoIdUser(userRef)) {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
-        let existeReferido = 0;
         const endPoint_comprobarUserRef = 'https://seofy.es/api/exists_user_ref/'+tokenEnPoint+'/'+userRef;
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
-          existeReferido = response.existe;
-          console.log(response.existe);
-          console.log('existeReferido dentro:'+existeReferido);
+          if(response.existe) {
+            console.log('existe la id del referido');
+          } else {
+            console.log('NO existe la id del referido');
+          }
         })
         .catch((error) => {
           console.error('error'+error);
         });
         console.log('existeReferido fuera:'+existeReferido);
-        if(existeReferido == 1) {
-          console.log('existe el id de referido');
-        } else {
-          console.log('NO existe el id de referido');
-        }
+
         //si existe userRef, guardar en tabla usuarios el userId.
         // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
 
