@@ -67,7 +67,7 @@ bot.start((ctx) => {
               jsonResponse = response.data;
               if(jsonResponse.error === 0) {
                 console.log('todo correcto');
-                bot.telegram.sendMessage(userRef, `Enhorabuena! Tiene un nuevo referido, name: ${nameUser} e id: ${idUser}`);
+                bot.telegram.sendMessage(userRef, `Enhorabuena! Tiene un nuevo referido, name: ${userId.name} e id: ${userId.userid}`);
               } else {
                 console.log('salio mal');
               }
