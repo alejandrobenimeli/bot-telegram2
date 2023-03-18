@@ -67,6 +67,7 @@ bot.start((ctx) => {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
         const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+userRef;
+        console.log('url: '+endPoint_comprobarUserRef);
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
           console.log('la respuesta es: '+response.existe);
