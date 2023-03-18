@@ -49,6 +49,8 @@ bot.start((ctx) => {
         .then((response) => {
           if(response.existe) {
             console.log('existe la id del referido');
+            //si existe userRef, guardar en tabla usuarios el userId.
+            // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
             axios.post('https://seofy.es/api/guardar-userid', {
               token: tokenEnPoint,
               idUser: userId.userid,
@@ -60,12 +62,13 @@ bot.start((ctx) => {
               }
             })
             .then(response => {
-              console.log(response.data); // imprimir la respuesta del servidor
+              console.log(response.data);
+              //aqui notificar al userRef de que tiene un nuevo usuario si error = 0
+
             })
             .catch(error => {
-              console.log(error); // imprimir el error en caso de que la petición falle
+              console.log(error);
             });
-            console.log('Petición POST en proceso...');
           } else {
             console.log('NO existe la id del referido');
           }
@@ -74,18 +77,12 @@ bot.start((ctx) => {
           console.error('error'+error);
         });
 
-        //si existe userRef, guardar en tabla usuarios el userId.
-        // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
-
         /*
-         const user = await ctx.telegram.getChat(userRef);
-         console.log(user);
-         ctx.reply(`${user.first_name} existe en Telegram el user referido`);
-         */
          console.log('el usuario referido es: '+userRef);
          console.log('el user id: ');
          console.log(userId);
          console.log('tiene un usuario referido');
+         */
       } catch (error) {
          console.log(error);
          console.log('No se pudo encontrar el usuario');
