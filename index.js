@@ -15,7 +15,7 @@ const staticMenu = [
 ];
 
 
-const idUserRegex = /^\d{10}$/;
+const idUserRegex = /^\d{7,12}$/;
 
 function validarFormatoIdUser(idUser) {
   return idUserRegex.test(idUser);
@@ -67,7 +67,7 @@ bot.start((ctx) => {
               jsonResponse = response.data;
               if(jsonResponse.error === 0) {
                 console.log('todo correcto');
-                bot.telegram.sendMessage(userRef, `Enhorabuena! Tiene un <b>nuevo</b> referido, name: ${userId.name} e id: ${userId.userid}`, {parse_mode: 'HTML'});
+                bot.telegram.sendMessage(userRef, `¡Enhorabuena! Tiene un nuevo referido, NAME: ${userId.name} e ID: ${userId.userid}`);
               } else {
                 console.log('salio mal');
               }
@@ -82,15 +82,9 @@ bot.start((ctx) => {
           }
         })
         .catch((error) => {
-          console.error('error'+error);
+          console.error('error: '+error);
         });
 
-        /*
-         console.log('el usuario referido es: '+userRef);
-         console.log('el user id: ');
-         console.log(userId);
-         console.log('tiene un usuario referido');
-         */
       } catch (error) {
          console.log(error);
          console.log('No se pudo encontrar el usuario');
@@ -104,6 +98,15 @@ bot.start((ctx) => {
     console.log('el user id: '+userId.userid+' , el name: '+userId.name);
     //comprobar si existe en la base de datos como userRef o userId. si existe no hacer nada. si no existse
     //guardar el userid vacio sin referidos en la bd como userRef (tabla referidos)
+    const endPoint_comprobarUser = 'https://seofy.es/api/exists-user-id/'+tokenEnPoint+'/'+userId.userid;
+    peticionGet(endPoint_comprobarUser)
+    .then((response) => {
+      console.log('la respuesta sin referido es: ');
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error('error: '+error);
+    });
   }
 
   //console.log('el id de usuario de telegram es: '+ctx.from.id);
