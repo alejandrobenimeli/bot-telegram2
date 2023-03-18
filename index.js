@@ -64,7 +64,7 @@ bot.start((ctx) => {
             .then(response => {
               console.log(response.data);
               //aqui notificar al userRef de que tiene un nuevo usuario si error = 0
-              $jsonResponse = response.data;
+              $jsonResponse = JSON.parse(response.data);
               if($jsonResponse.error = 0) {
                 console.log('todo correcto');
               } else {
