@@ -1,7 +1,9 @@
 const { Telegraf, Markup } = require('telegraf');
 
 
-const bot = new Telegraf(process.env.TOKEN)
+const bot = new Telegraf(process.env.TOKEN);
+const https = require('https');
+
 const tokenEnPoint = 'abl248924';
 let previousMessageId;
 
@@ -21,18 +23,16 @@ function validarFormatoIdUser(idUser) {
 
 function peticionGet(endPoint) {
   // Realizar la petición GET
-  const https = require('https');
-  console.log('la url es '+endPoint);
+  //console.log('la url es '+endPoint);
   return new Promise((resolve, reject) => {
     https.get(endPoint, (res) => {
       let data = '';
       res.on('data', (chunk) => {
         data += chunk;
-        console.log('entra en 2'+data);
+        console.log('entra en 1');
       });
       res.on('end', () => {
         const json = JSON.parse(data);
-        console.log('entra en 3:'+json);
         resolve(json);
       });
     }).on('error', (err) => {
@@ -57,8 +57,7 @@ bot.start((ctx) => {
         //console.log('el resultado es '+ json.existe);
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
-          console.log('hola:');
-          console.log(response);
+          console.log('existe el referido?'+response.existe);
         })
         .catch((error) => {
           console.error('error'+error);
