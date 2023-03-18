@@ -63,7 +63,6 @@ bot.start((ctx) => {
         .catch((error) => {
           console.error('error'+error);
         });
-        console.log('existeReferido fuera:'+existeReferido);
 
         //si existe userRef, guardar en tabla usuarios el userId.
         // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
