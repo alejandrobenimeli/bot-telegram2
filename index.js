@@ -29,7 +29,6 @@ function peticionGet(endPoint) {
       let data = '';
       res.on('data', (chunk) => {
         data += chunk;
-        console.log('entra en 1');
       });
       res.on('end', () => {
         const json = JSON.parse(data);
@@ -52,16 +51,20 @@ bot.start((ctx) => {
     if(validarFormatoIdUser(userRef)) {
       try {
         //aqui comprobar que el userRef exista como userRef (tabla referidos)
+        let existeReferido = 0;
         const endPoint_comprobarUserRef = 'https://seofy.es/api/exists_user_ref/'+tokenEnPoint+'/'+userRef;
-        //const json = peticionGet(endPoint_comprobarUserRef);
-        //console.log('el resultado es '+ json.existe);
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
-          console.log('existe el referido?'+response.existe);
+          existeReferido = response.existe;
         })
         .catch((error) => {
           console.error('error'+error);
         });
+        if(existeReferido) {
+          console.log('existe el id de referido');
+        } else {
+          console.log('NO existe el id de referido');
+        }
         //si existe userRef, guardar en tabla usuarios el userId.
         // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
 
@@ -90,7 +93,7 @@ bot.start((ctx) => {
 
   //console.log('el id de usuario de telegram es: '+ctx.from.id);
   bot.telegram.sendMessage(5997313040, 'tu madre es calva y lleva perila');
-  bot.telegram.sendMessage(1869069790, 'tu madre es calva y lleva perilla');
+  //bot.telegram.sendMessage(1869069790, 'tu madre es calva y lleva perilla');
   ctx.reply('¡Bienvenido! ¿Qué acción quieres realizar?', {
     reply_markup: {
       keyboard: staticMenu,
