@@ -96,7 +96,7 @@ bot.start((ctx) => {
     }
   } else {
     console.log('no hay ningun usuario referido');
-    console.log('el user id: '+userId.userid+' , el name: '+userId.name+' el language: '+userId.language);
+    console.log('el user id: '+userId.userid+' , el name: '+userId.name+', el language: '+userId.language);
     //comprobar si existe en la base de datos como userRef o userId. si existe no hacer nada. si no existse
     //guardar el userid vacio sin referidos en la bd como userRef (tabla referidos)
     const endPoint_comprobarUser = 'https://seofy.es/api/exists-user/'+tokenEnPoint+'/'+userId.userid;
@@ -169,7 +169,7 @@ bot.hears('Añadir producto al carrito', (ctx) => {
 });
 
 const menuAfiliados = [
-  [{ text: 'Generar link de afiliado', callback_data: 'linkAfiliado' }],
+  [{ text: ' 🇪🇸 Generar link de afiliado', callback_data: 'linkAfiliado' }],
   [{ text: 'Ver mi referido', callback_data: 'verReferido' }],
   [{ text: 'Ver mis afiliados', callback_data: 'verAfiliados' }]
 ];
