@@ -471,10 +471,8 @@ async function verAfiliados(ctx) {
 
 
 async function scrapeCiudades() {
-  //const browser = await puppeteer.launch();
-  const browser = await puppeteer.launch({
-    executablePath: '/app/.apt/opt/google/chrome/chrome'
-  });
+  const browser = await puppeteer.launch();
+  //const browser = await puppeteer.launch({executablePath: '/app/.apt/opt/google/chrome/chrome'});
   const page = await browser.newPage();
   await page.goto('https://icp.administracionelectronica.gob.es/icpplus/index.html');
 
