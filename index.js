@@ -177,9 +177,7 @@ const menuAfiliados = [
 //const inlineKeyboardOptions = {   disable_web_page_preview: true, disable_notification: true};
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
-  // Acción a realizar cuando se seleccione el botón
   ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados));
-  // ...
 });
 
 /*
@@ -358,12 +356,28 @@ bot.on('callback_query', async(ctx) => {
 });
 
 async function compartirEnlace(ctx) {
+  /*
   await ctx.reply('📣Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado. Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150 euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este enlace lo comparte con mucha gente');
   await ctx.reply('Recuerda, a cuanta mas gente lo compartas y hagan compras...mas 💲💲');
   await ctx.reply('Enlace a compartir❗')
   const idUser = ctx.callbackQuery.from.id;
   const nameBot = ctx.callbackQuery.message.from.username;
   await ctx.reply('https://t.me/'+nameBot+'?start='+idUser);
+  */
+  const idUser = ctx.callbackQuery.from.id;
+  const nameBot = ctx.callbackQuery.message.from.username;
+
+  // Concatenar los mensajes en un solo mensaje utilizando formato HTML
+  const messageText = `<b>📣 Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado.</b>\n\n` +
+                      `Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150 euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este enlace lo comparte con mucha gente.\n\n` +
+                      `Recuerda, a cuanta mas gente lo compartas y hagan compras...mas 💲💲\n\n` +
+                      `<b>Enlace a compartir❗</b>\n` +
+                      `<a href="https://t.me/${nameBot}?start=${idUser}">https://t.me/${nameBot}?start=${idUser}</a>`;
+
+  // Enviar el mensaje como HTML
+  await ctx.telegram.sendMessage(ctx.chat.id, messageText, {
+    parse_mode: 'HTML'
+  });
 }
 
 function verReferido(ctx) {
