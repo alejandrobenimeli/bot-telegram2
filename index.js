@@ -391,11 +391,11 @@ async function verAfiliados(ctx) {
   try {
     const response = await peticionGet(endPoint);
     //SI ES ARRAY ES PORQUE TIENE AFILIADOS
-    console.log(response);
+    //console.log(response);
     if(Array.isArray(response)) {
       let msgAfiliados = '';
-      msgAfiliados += 'AFILIADOS';
-      msgAfiliados += '----------------------';
+      msgAfiliados += 'AFILIADOS\n';
+      msgAfiliados += '----------------------\n';
       //await ctx.reply('AFILIADOS');
       //await ctx.reply('----------------------');
       const cantidadElementos = response.length;
@@ -404,7 +404,7 @@ async function verAfiliados(ctx) {
         let nombre_usuario = response[i].nombre_usuario;
         let fecha_asociacion = moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm');
         let numeroLista = i+1;
-        console.log('Nombre de usuario: '+nombre_usuario+' y fecha: '+fecha_asociacion);
+        //console.log('Nombre de usuario: '+nombre_usuario+' y fecha: '+fecha_asociacion);
         msgAfiliados += numeroLista+'- Nombre: '+nombre_usuario+'\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n';
         //await ctx.reply(numeroLista+'- Nombre: '+nombre_usuario+'\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n\n');
       }
