@@ -1,6 +1,6 @@
 const { Telegraf, Markup } = require('telegraf');
 const axios = require('axios');
-
+const moment = require('moment');
 
 const bot = new Telegraf(process.env.TOKEN);
 
@@ -394,7 +394,7 @@ function verAfiliados(ctx) {
     if(Array.isArray(response)) {
       const cantidadElementos = response.length;
       for (let i = 0; i < cantidadElementos; i++) {
-        console.log('Nombre de usuario: '+response[i].nombre_usuario+' y fecha: '+response[i].fecha_asociacion);
+        console.log('Nombre de usuario: '+response[i].nombre_usuario+' y fecha: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm'));
       }
     }
   })
