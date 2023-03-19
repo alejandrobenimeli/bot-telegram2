@@ -169,7 +169,7 @@ bot.hears('Añadir producto al carrito', (ctx) => {
 });
 
 const menuAfiliados = [
-  [{ text: ' 🇪🇸 Generar link de afiliado', callback_data: 'linkAfiliado' }],
+  [{ text: 'Generar link de afiliado', callback_data: 'linkAfiliado' }],
   [{ text: 'Ver mi referido', callback_data: 'verReferido' }],
   [{ text: 'Ver mis afiliados', callback_data: 'verAfiliados' }]
 ];
@@ -391,22 +391,17 @@ async function verAfiliados(ctx) {
   try {
     const response = await peticionGet(endPoint);
     //SI ES ARRAY ES PORQUE TIENE AFILIADOS
-    //console.log(response);
+
     if(Array.isArray(response)) {
       const cantidadElementos = response.length;
       let msgAfiliados = '';
       msgAfiliados += 'AFILIADOS ('+cantidadElementos+')\n';
       msgAfiliados += '---------------------------\n';
-      //await ctx.reply('AFILIADOS');
-      //await ctx.reply('----------------------');
-
       for (let i = 0; i < cantidadElementos; i++) {
         let nombre_usuario = response[i].nombre_usuario;
         let fecha_asociacion = moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm');
         let numeroLista = i+1;
-        //console.log('Nombre de usuario: '+nombre_usuario+' y fecha: '+fecha_asociacion);
         msgAfiliados += numeroLista+'- Nombre: '+nombre_usuario+'\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n';
-        //await ctx.reply(numeroLista+'- Nombre: '+nombre_usuario+'\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n\n');
       }
       await ctx.reply(msgAfiliados);
     }
@@ -414,29 +409,6 @@ async function verAfiliados(ctx) {
     console.error('error verAfiliados: '+error);
   }
 }
-/*
-async function verAfiliados(ctx) {
-  const idUser = ctx.callbackQuery.from.id;
-  const endPoint = 'https://seofy.es/api/get-afiliados/'+tokenEnPoint+'/'+idUser;
-  peticionGet(endPoint)
-  .then((response) => {
-    //SI ES ARRAY ES PORQUE TIENE AFILIADOS
-    console.log(response);
-    if(Array.isArray(response)) {
-      await ctx.reply('AFILIADOS');
-      await ctx.reply('------------');
-      const cantidadElementos = response.length;
-      for (let i = 0; i < cantidadElementos; i++) {
-        console.log('Nombre de usuario: '+response[i].nombre_usuario+' y fecha: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm'));
-        await ctx.reply('Nombre: '+response[i].nombre_usuario+', Fecha de afiliación: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm')+' GTM+1');
-      }
-    }
-  })
-  .catch((error) => {
-    console.error('error verAfiliados: '+error);
-  });
-}
-*/
 
 /*
 //el evento se produce cuando el usario escribe algo, tiene que ir debajo del command.'menu' porque sino el command menu no lo coge y salta al evento on text
