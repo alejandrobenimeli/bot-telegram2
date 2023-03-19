@@ -384,8 +384,6 @@ async function compartirEnlace(ctx) {
     idMessageAfiliados = sentMessage.message_id;
   } else {
     if(msgAfiliadosAnterior != messageText) {
-      console.log('msgAfiliadosAnterior:'+msgAfiliadosAnterior);
-      console.log('messageText:'+messageText);
       await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText,  {
         parse_mode: 'HTML'
       });
@@ -451,7 +449,10 @@ async function verReferido(ctx) {
         const sentMessage = await ctx.reply(messageText);
         idMessageAfiliados = sentMessage.message_id;
       } else {
-        await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+        if(msgAfiliadosAnterior != messageText) {
+          await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+          msgAfiliadosAnterior = messageText;
+        }
       }
       //ctx.reply('Usuario referido: ninguno');
     }
