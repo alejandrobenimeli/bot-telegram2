@@ -1,4 +1,4 @@
-const { Telegraf, Markup, Extra } = require('telegraf');
+const { Telegraf, Markup } = require('telegraf');
 const axios = require('axios');
 const moment = require('moment');
 //const Extra = require('telegraf/extra');
@@ -356,6 +356,7 @@ bot.on('callback_query', async(ctx) => {
  }
 });
 let idMessageAfiliados;
+let msgAfiliadosAnterior = '';
 async function compartirEnlace(ctx) {
   /*
   await ctx.reply('📣Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado. Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150 euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este enlace lo comparte con mucha gente');
@@ -382,9 +383,11 @@ async function compartirEnlace(ctx) {
     });
     idMessageAfiliados = sentMessage.message_id;
   } else {
-    await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText,  {
-      parse_mode: 'HTML'
-    });
+    if(msgAfiliadosAnterior != messageText) {
+      await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText,  {
+        parse_mode: 'HTML'
+      });
+    }
   }
 }
 
