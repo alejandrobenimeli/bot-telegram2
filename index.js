@@ -351,7 +351,7 @@ bot.on('callback_query', async(ctx) => {
  } else if (data === 'linkAfiliado') {
     await compartirEnlace(ctx);
  } else if (data === 'verReferido') {
-    await verReferido(ctx);
+    //await verReferido(ctx);
  }
 });
 
