@@ -1,6 +1,7 @@
 const { Telegraf, Markup } = require('telegraf');
 const axios = require('axios');
 const moment = require('moment');
+const Extra = require('telegraf/extra');
 
 const bot = new Telegraf(process.env.TOKEN);
 
@@ -381,7 +382,7 @@ async function compartirEnlace(ctx) {
     });
     idMessageAfiliados = sentMessage.message_id;
   } else {
-    await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+    await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText, Extra.HTML());
   }
 }
 
@@ -432,6 +433,7 @@ async function verReferido(ctx) {
         const sentMessage = await ctx.reply(messageText);
         idMessageAfiliados = sentMessage.message_id;
       } else {
+        console.log('se mete en bla: '+messageText);
         await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
       }
     } else {
