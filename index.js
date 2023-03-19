@@ -354,7 +354,7 @@ bot.on('callback_query', async(ctx) => {
     await verAfiliados(ctx);
  }
 });
-
+let idMessageAfiliados;
 async function compartirEnlace(ctx) {
   /*
   await ctx.reply('📣Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado. Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150 euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este enlace lo comparte con mucha gente');
@@ -368,16 +368,21 @@ async function compartirEnlace(ctx) {
   const nameBot = ctx.callbackQuery.message.from.username;
 
   // Concatenar los mensajes en un solo mensaje utilizando formato HTML
-  const messageText = `<b>📣<font color="red">Si comparte este link</font>, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado.</b>\n\n` +
+  const messageText = `<b>📣Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado.</b>\n\n` +
                       `Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150 euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este enlace lo comparte con mucha gente.\n\n` +
                       `Recuerda, a cuanta mas gente lo compartas y hagan compras...mas 💲💲\n\n` +
                       `<b>Enlace a compartir❗</b>\n` +
                       `<a href="https://t.me/${nameBot}?start=${idUser}">https://t.me/${nameBot}?start=${idUser}</a>`;
 
-  // Enviar el mensaje como HTML
-  await ctx.telegram.sendMessage(ctx.chat.id, messageText, {
-    parse_mode: 'HTML'
-  });
+  if(!idMessageAfiliados) {
+    // Enviar el mensaje como HTML
+    const sentMessage = await ctx.telegram.sendMessage(ctx.chat.id, messageText, {
+      parse_mode: 'HTML'
+    });
+    idMessageAfiliados = sentMessage.message_id;
+  } else {
+    await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+  }
 }
 
 function verReferido(ctx) {
@@ -387,10 +392,24 @@ function verReferido(ctx) {
   .then((response) => {
     //EN ESTE IF SE ENTRA, SI EXISTE EL USUARIO
     if(response.nombre_usuario !== false) {
+      const messageText = 'Usuario referido: '+ response.nombre_usuario;
       //GUARDAR EN LA TABLA referidos
-      ctx.reply('Usuario referido: '+ response.nombre_usuario);
+      if(!idMessageAfiliados) {
+        const sentMessage = ctx.reply(messageText);
+        idMessageAfiliados = sentMessage.message_id;
+      } else {
+        await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+      }
     } else {
-      ctx.reply('Usuario referido: ninguno');
+      const messageText = 'Usuario referido: ninguno';
+      //GUARDAR EN LA TABLA referidos
+      if(!idMessageAfiliados) {
+        const sentMessage = ctx.reply(messageText);
+        idMessageAfiliados = sentMessage.message_id;
+      } else {
+        await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+      }
+      //ctx.reply('Usuario referido: ninguno');
     }
   })
   .catch((error) => {
