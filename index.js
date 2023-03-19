@@ -441,8 +441,11 @@ async function verReferido(ctx) {
         const sentMessage = await ctx.reply(messageText);
         idMessageAfiliados = sentMessage.message_id;
       } else {
-        console.log('se mete en bla: '+messageText);
-        await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+        if(msgAfiliadosAnterior != messageText) {
+          console.log('se mete en bla: '+messageText);
+          await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+          msgAfiliadosAnterior = messageText;
+        }
       }
     } else {
       const messageText = 'Usuario referido: ninguno';
