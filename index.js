@@ -399,8 +399,9 @@ async function verAfiliados(ctx) {
       for (let i = 0; i < cantidadElementos; i++) {
         let nombre_usuario = response[i].nombre_usuario;
         let fecha_asociacion = moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm');
+        let numeroLista = i+1;
         console.log('Nombre de usuario: '+nombre_usuario+' y fecha: '+fecha_asociacion);
-        await ctx.reply((i+1)'- Nombre: '+nombre_usuario+',\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n\n');
+        await ctx.reply(numeroLista+'- Nombre: '+nombre_usuario+',\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n\n');
       }
     }
   } catch (error) {
