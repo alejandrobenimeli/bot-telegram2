@@ -38,7 +38,7 @@ bot.start((ctx) => {
   // Mostrar el menú fijo
   //Tiene un usuario referido
   const userRef = ctx.message.text.split(' ')[1];
-  const userId = {userid: ctx.message.from.id, name: ctx.message.from.first_name};
+  const userId = {userid: ctx.message.from.id, name: ctx.message.from.first_name, language: ctx.message.from.language_code};
 
   if(userRef) {
     if(validarFormatoIdUser(userRef)) {
