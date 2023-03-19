@@ -102,7 +102,7 @@ bot.start((ctx) => {
     const endPoint_comprobarUser = 'https://seofy.es/api/exists-user/'+tokenEnPoint+'/'+userId.userid;
     peticionGet(endPoint_comprobarUser)
     .then((response) => {
-      console.log('la respuesta sin referido es: ');
+      //si ya existe el user, no hacemos nada ni se muestra nada
       if(response.existe === 0) {
         //GUARDAR EN LA TABLA referidos
         axios.post('https://seofy.es/api/guardar-user', {
@@ -168,10 +168,17 @@ bot.hears('Añadir producto al carrito', (ctx) => {
   // ...
 });
 
-// Manejador de eventos para el botón "Ver carrito de compras"
+const menuAfiliados = [
+  [
+    { text: 'Generar link de afiliado', callback_data: 'linkAfiliado' },
+    { text: 'Ver mi referido', callback_data: 'verReferido' },
+    { text: 'Ver mis afiliados', callback_data: 'verAfiliados' }
+  ]
+];
+// Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
-  ctx.reply('Aquí está tu carrito de compras:');
+  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados));
   // ...
 });
 
