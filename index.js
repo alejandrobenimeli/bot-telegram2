@@ -394,11 +394,13 @@ async function verAfiliados(ctx) {
     console.log(response);
     if(Array.isArray(response)) {
       await ctx.reply('AFILIADOS');
-      await ctx.reply('------------');
+      await ctx.reply('----------------------');
       const cantidadElementos = response.length;
       for (let i = 0; i < cantidadElementos; i++) {
-        console.log('Nombre de usuario: '+response[i].nombre_usuario+' y fecha: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm'));
-        await ctx.reply('Nombre: '+response[i].nombre_usuario+', Fecha de afiliación: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm')+' GTM+1');
+        let nombre_usuario = response[i].nombre_usuario;
+        let fecha_asociacion = moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm');
+        console.log('Nombre de usuario: '+nombre_usuario+' y fecha: '+fecha_asociacion);
+        await ctx.reply((i+1)'- Nombre: '+nombre_usuario+',\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n\n');
       }
     }
   } catch (error) {
