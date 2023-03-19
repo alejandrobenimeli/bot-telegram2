@@ -169,16 +169,16 @@ bot.hears('Añadir producto al carrito', (ctx) => {
 });
 
 const menuAfiliados = [
-  [{ text: 'Generar link de afiliado', callback_data: 'linkAfiliado' }],
+  [{ text: '🇪🇸 Generar link de afiliado', callback_data: 'linkAfiliado' }],
   [{ text: 'Ver mi referido', callback_data: 'verReferido' }],
   [{ text: 'Ver mis afiliados', callback_data: 'verAfiliados' }]
 ];
 
-const inlineKeyboardOptions = {   disable_web_page_preview: true, disable_notification: true};
+//const inlineKeyboardOptions = {   disable_web_page_preview: true, disable_notification: true};
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
-  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados,inlineKeyboardOptions));
+  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados));
   // ...
 });
 
@@ -312,7 +312,7 @@ bot.on('callback_query', async(ctx) => {
   if (data === 'opcion1') {
     //ctx.telegram.deleteMessage(menuAborrar.chat.id, menuAborrar.message.message_id);
     const message = ctx.callbackQuery.message;
-    menuAguardar = { chat_id: message.chat.id, message_id: message.message_id };
+    menuAguardar = { chat_id: m󠁧󠁢essage.chat.id, message_id: message.message_id };
     ctx.editMessageText('Selecciona una opción de comida:', {
       reply_markup: {
         inline_keyboard: menuOptionsComida
