@@ -43,16 +43,15 @@ bot.start((ctx) => {
   if(userRef) {
     if(validarFormatoIdUser(userRef)) {
       try {
-        //aqui comprobar que el user exista en la tabla usuarios y no en la tabla asociacion_referidos. esto quiere
-        //decir que el user no tiene referencia
-        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user-sin-ref/'+tokenEnPoint+'/'+userRef;
-        console.log('url: '+endPoint_comprobarUserRef);
+        //aqui comprobar que el user exista en la tabla usuarios
+        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user/'+tokenEnPoint+'/'+userRef;
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
           if(response.existe) {
             console.log('existe la id del referido');
-            //si existe userRef, guardar en tabla usuarios el userId.
-            // y guardar en tabla asociacion_referidos_usuario la asociacion del userRef y userId
+            //si existe ID_USER_SIN_REFERIDO, guardar en tabla usuarios el tipo ID_USER_REFERIDO.si ya existe en la tabla
+            //no se guardará, porque o ya era un referido o tenia referidos
+            // y guardar en tabla asociacion_referidos la asociacion del tipo ID_USER_SIN_REFERIDO y ID_USER_REFERIDO
             axios.post('https://seofy.es/api/guardar-userid', {
               token: tokenEnPoint,
               idUser: userId.userid,
@@ -65,7 +64,7 @@ bot.start((ctx) => {
             })
             .then(response => {
               console.log(response.data);
-              //aqui notificar al userRef de que tiene un nuevo usuario referido si error = 0
+              //aqui notificar al tipo ID_USER_SIN_REFERIDO de que tiene un nuevo usuario referido si error = 0
               jsonResponse = response.data;
               if(jsonResponse.error === 0) {
                 console.log('todo correcto');
@@ -100,13 +99,13 @@ bot.start((ctx) => {
     console.log('el user id: '+userId.userid+' , el name: '+userId.name);
     //comprobar si existe en la base de datos como userRef o userId. si existe no hacer nada. si no existse
     //guardar el userid vacio sin referidos en la bd como userRef (tabla referidos)
-    const endPoint_comprobarUser = 'https://seofy.es/api/exists-user-id/'+tokenEnPoint+'/'+userId.userid;
+    const endPoint_comprobarUser = 'https://seofy.es/api/exists-user/'+tokenEnPoint+'/'+userId.userid;
     peticionGet(endPoint_comprobarUser)
     .then((response) => {
       console.log('la respuesta sin referido es: ');
       if(response.existe === 0) {
         //GUARDAR EN LA TABLA referidos
-        axios.post('https://seofy.es/api/guardar-userref', {
+        axios.post('https://seofy.es/api/guardar-user', {
           token: tokenEnPoint,
           idUser: userId.userid,
           nameUser: userId.name
