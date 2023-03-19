@@ -382,6 +382,7 @@ async function compartirEnlace(ctx) {
       parse_mode: 'HTML'
     });
     idMessageAfiliados = sentMessage.message_id;
+    msgAfiliadosAnterior = messageText;
   } else {
     if(msgAfiliadosAnterior != messageText) {
       console.log('msgAfiliadosAnterior:'+msgAfiliadosAnterior);
