@@ -392,14 +392,14 @@ function verAfiliados(ctx) {
     //SI ES ARRAY ES PORQUE TIENE AFILIADOS
     console.log(response);
     if(Array.isArray(response)) {
-      const cantidadElementos = datos.length;
+      const cantidadElementos = response.length;
       for (let i = 0; i < cantidadElementos; i++) {
         console.log('Nombre de usuario: '+response[i].nombre_usuario+' y fecha: '+response[i].fecha_asociacion);
       }
     }
   })
   .catch((error) => {
-    console.error('error verReferido: '+error);
+    console.error('error verAfiliados: '+error);
   });
 }
 
