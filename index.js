@@ -351,7 +351,7 @@ bot.on('callback_query', async(ctx) => {
  } else if (data === 'linkAfiliado') {
     await compartirEnlace(ctx);
  } else if (data === 'verReferido') {
-    //await verReferido(ctx);
+    verReferido(ctx);
  }
 });
 
@@ -364,7 +364,7 @@ async function compartirEnlace(ctx) {
   await ctx.reply('https://t.me/'+nameBot+'?start='+idUser);
 }
 
-async function verReferido(ctx) {
+function verReferido(ctx) {
   const idUser = ctx.callbackQuery.from.id;
   const endPoint = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+idUser;
   peticionGet(endPoint)
@@ -372,9 +372,9 @@ async function verReferido(ctx) {
     //EN ESTE IF SE ENTRA, SI EXISTE EL USUARIO
     if(response.nombre_usuario !== false) {
       //GUARDAR EN LA TABLA referidos
-      await ctx.reply('Usuario referido: '+ response.nombre_usuario);
+      ctx.reply('Usuario referido: '+ response.nombre_usuario);
     } else {
-      await ctx.reply('Usuario referido: ninguno');
+      ctx.reply('Usuario referido: ninguno');
     }
   })
   .catch((error) => {
