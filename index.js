@@ -382,7 +382,9 @@ async function compartirEnlace(ctx) {
     });
     idMessageAfiliados = sentMessage.message_id;
   } else {
-    await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText,  Extra.markup(Markup.HTML));
+    await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText,  {
+      parse_mode: 'HTML'
+    });
   }
 }
 
