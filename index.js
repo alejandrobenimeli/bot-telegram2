@@ -178,7 +178,8 @@ const inlineKeyboardOptions = { disable_web_page_preview: true };
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
-  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados,inlineKeyboardOptions));
+  //ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados,inlineKeyboardOptions));
+  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados).extra({disable_web_page_preview: true}));
   // ...
 });
 
