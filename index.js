@@ -43,8 +43,10 @@ bot.start((ctx) => {
   if(userRef) {
     if(validarFormatoIdUser(userRef)) {
       try {
-        //aqui comprobar que el userRef exista como userRef (tabla referidos)
-        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+userRef;
+        //aqui comprobar que el user exista en la tabla usuarios y no en la tabla asociacion_referidos. esto quiere
+        //decir que el user no tiene referencia
+        const endPoint_comprobarUserRef = 'https://seofy.es/api/exists-user-sin-ref/'+tokenEnPoint+'/'+userRef;
+        console.log('url: '+endPoint_comprobarUserRef);
         peticionGet(endPoint_comprobarUserRef)
         .then((response) => {
           if(response.existe) {
