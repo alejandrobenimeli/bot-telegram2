@@ -178,7 +178,7 @@ const menuAfiliados = [
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
-  //ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados));
+  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados));
   // ...
 });
 
