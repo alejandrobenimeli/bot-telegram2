@@ -169,11 +169,9 @@ bot.hears('Añadir producto al carrito', (ctx) => {
 });
 
 const menuAfiliados = [
-  [
-    { text: 'Generar link de afiliado', callback_data: 'linkAfiliado' },
-    { text: 'Ver mi referido', callback_data: 'verReferido' },
-    { text: 'Ver mis afiliados', callback_data: 'verAfiliados' }
-  ]
+  [{ text: 'Generar link de afiliado', callback_data: 'linkAfiliado' }],
+  [{ text: 'Ver mi referido', callback_data: 'verReferido' }],
+  [{ text: 'Ver mis afiliados', callback_data: 'verAfiliados' }]
 ];
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
