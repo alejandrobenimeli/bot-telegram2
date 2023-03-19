@@ -468,6 +468,7 @@ async function verAfiliados(ctx) {
 //------------------------------
 //SECCION SACAR CITA
 //------------------------------
+
 async function scrapeCiudades() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -491,6 +492,7 @@ async function scrapeCiudades() {
     }
     return optionValues;
   });
+};
 
   //------------------------------
   //FIN SECCION SACAR CITA
