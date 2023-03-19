@@ -357,15 +357,8 @@ bot.on('callback_query', async(ctx) => {
 });
 let idMessageAfiliados;
 let msgAfiliadosAnterior = '';
+
 async function compartirEnlace(ctx) {
-  /*
-  await ctx.reply('📣Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado. Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150 euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este enlace lo comparte con mucha gente');
-  await ctx.reply('Recuerda, a cuanta mas gente lo compartas y hagan compras...mas 💲💲');
-  await ctx.reply('Enlace a compartir❗')
-  const idUser = ctx.callbackQuery.from.id;
-  const nameBot = ctx.callbackQuery.message.from.username;
-  await ctx.reply('https://t.me/'+nameBot+'?start='+idUser);
-  */
   const idUser = ctx.callbackQuery.from.id;
   const nameBot = ctx.callbackQuery.message.from.username;
 
@@ -385,8 +378,6 @@ async function compartirEnlace(ctx) {
     msgAfiliadosAnterior = messageText;
   } else {
     if(msgAfiliadosAnterior != messageText) {
-      console.log('msgAfiliadosAnterior:'+msgAfiliadosAnterior);
-      console.log('messageText:'+messageText);
       await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText,  {
         parse_mode: 'HTML'
       });
@@ -394,40 +385,6 @@ async function compartirEnlace(ctx) {
     }
   }
 }
-
-/*
-async function verReferido(ctx) {
-  const idUser = ctx.callbackQuery.from.id;
-  const endPoint = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+idUser;
-  peticionGet(endPoint)
-  .then(async(response) => {
-    //EN ESTE IF SE ENTRA, SI EXISTE EL USUARIO
-    if(response.nombre_usuario !== false) {
-      const messageText = 'Usuario referido: '+ response.nombre_usuario;
-      //GUARDAR EN LA TABLA referidos
-      if(!idMessageAfiliados) {
-        const sentMessage = ctx.reply(messageText);
-        idMessageAfiliados = sentMessage.message_id;
-      } else {
-        await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
-      }
-    } else {
-      const messageText = 'Usuario referido: ninguno';
-      //GUARDAR EN LA TABLA referidos
-      if(!idMessageAfiliados) {
-        const sentMessage = ctx.reply(messageText);
-        idMessageAfiliados = sentMessage.message_id;
-      } else {
-        await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
-      }
-      //ctx.reply('Usuario referido: ninguno');
-    }
-  })
-  .catch((error) => {
-    console.error('error verReferido: '+error);
-  });
-}
-*/
 
 async function verReferido(ctx) {
   const idUser = ctx.callbackQuery.from.id;
@@ -441,6 +398,7 @@ async function verReferido(ctx) {
       if (!idMessageAfiliados) {
         const sentMessage = await ctx.reply(messageText);
         idMessageAfiliados = sentMessage.message_id;
+        msgAfiliadosAnterior = messageText;
       } else {
         if(msgAfiliadosAnterior != messageText) {
           console.log('se mete en bla: '+messageText);
@@ -454,6 +412,7 @@ async function verReferido(ctx) {
       if (!idMessageAfiliados) {
         const sentMessage = await ctx.reply(messageText);
         idMessageAfiliados = sentMessage.message_id;
+        msgAfiliadosAnterior = messageText;
       } else {
         if(msgAfiliadosAnterior != messageText) {
           await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
