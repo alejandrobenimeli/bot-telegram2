@@ -1,7 +1,7 @@
 const { Telegraf, Markup } = require('telegraf');
 const axios = require('axios');
 const moment = require('moment');
-//const Extra = require('telegraf/extra');
+const puppeteer = require('puppeteer');
 
 const bot = new Telegraf(process.env.TOKEN);
 
@@ -11,7 +11,7 @@ let previousMessageId;
 
 // Menú fijo
 const staticMenu = [
-  [{ text: '🎂 Ver lista de productos' }, { text: 'Buscar producto' }],
+  [{ text: 'Sacar cita' }, { text: 'Buscar producto' }],
   [{ text: 'Añadir producto al carrito' }, { text: 'Afiliado' }]
 ];
 
@@ -135,8 +135,6 @@ bot.start((ctx) => {
     });
   }
 
-  //bot.telegram.sendMessage(5997313040, 'tu madre es calva y lleva perila');
-  //bot.telegram.sendMessage(1869069790, 'tu madre es calva y lleva perilla');
   ctx.reply('¡Bienvenido! ¿Qué acción quieres realizar?', {
     reply_markup: {
       keyboard: staticMenu,
@@ -147,9 +145,10 @@ bot.start((ctx) => {
 });
 
 // Manejador de eventos para el botón "Ver lista de productos"
-bot.hears('🎂 Ver lista de productos', (ctx) => {
+bot.hears('Sacar cita', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
-  ctx.reply('Aquí está la lista de productos:');
+  ctx.reply('Eliga una ciudad:');
+  console.log(scrapeCiudades());
   // ...
 });
 
@@ -167,13 +166,12 @@ bot.hears('Añadir producto al carrito', (ctx) => {
   // ...
 });
 
+
 const menuAfiliados = [
   [{ text: 'Generar link de afiliado', callback_data: 'linkAfiliado' }],
   [{ text: 'Ver mi referido', callback_data: 'verReferido' }],
   [{ text: 'Ver mis afiliados', callback_data: 'verAfiliados' }]
 ];
-
-//const inlineKeyboardOptions = {   disable_web_page_preview: true, disable_notification: true};
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
   //variables para que funcione el editMessageText cada vez que se
@@ -337,8 +335,6 @@ bot.on('callback_query', async(ctx) => {
   } else if (data === 'sopa') {
     ctx.reply('Seleccionase sopa');
   } else if (data === 'back') {
-    //await ctx.telegram.sendMessage(ctx.chat.id, '/menu'); // Envía el comando /menu al bot
-    //ctx.reply('/menu');
     if (menuAguardar) {
      // Si ya se mostró el menú antes, se muestra el mensaje guardado
      ctx.telegram.editMessageText(
@@ -357,6 +353,9 @@ bot.on('callback_query', async(ctx) => {
     await verAfiliados(ctx);
  }
 });
+//------------------------------
+//SECCION AFILIADOS
+//------------------------------
 let idMessageAfiliados;
 let msgAfiliadosAnterior = '';
 
@@ -461,6 +460,41 @@ async function verAfiliados(ctx) {
     console.error('error verAfiliados: '+error);
   }
 }
+
+//------------------------------
+//FIN SECCION AFILIADOS
+//------------------------------
+
+//------------------------------
+//SECCION SACAR CITA
+//------------------------------
+async function scrapeCiudades() {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto('https://icp.administracionelectronica.gob.es/icpplus/index.html');
+
+  // Espera a que el select esté disponible en la página
+  await page.waitForSelector('select#form');
+
+  // Obtiene todas las opciones del select
+  const selectOptions = await page.evaluate(() => {
+    // Selecciona el select
+    const select = document.querySelector('select#form');
+    // Obtiene todas las opciones del select
+    const options = select.querySelectorAll('option');
+    // Crea un arreglo para almacenar los valores de las opciones
+    const optionValues = [];
+    // Itera sobre las opciones y extrae sus valores, ignorando la primera opción
+    for (let i = 1; i < options.length; i++) {
+      const optionValue = options[i].value;
+      optionValues.push(optionValue);
+    }
+    return optionValues;
+  });
+
+  //------------------------------
+  //FIN SECCION SACAR CITA
+  //------------------------------
 
 /*
 //el evento se produce cuando el usario escribe algo, tiene que ir debajo del command.'menu' porque sino el command menu no lo coge y salta al evento on text
