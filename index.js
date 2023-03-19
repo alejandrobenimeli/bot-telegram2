@@ -348,7 +348,15 @@ bot.on('callback_query', async(ctx) => {
        Markup.inlineKeyboard(menuOptions)
      );
    }
-  }
+ } else if (data === 'linkAfiliado') {
+   ctx.reply('Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su
+   enlace de afiliado.Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150
+    euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este
+    enlace lo comparte con mucha gente');
+  ctx.reply('Enlace a compartir:💲💲');
+  ctx.reply('https://t.me/Papeleosextrajerosbot?start='+ctx.message.from.id);
+
+ }
 });
 
 /*
