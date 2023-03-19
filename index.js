@@ -353,7 +353,7 @@ bot.on('callback_query', async(ctx) => {
  } else if (data === 'verReferido') {
     verReferido(ctx);
  } else if (data === 'verAfiliados') {
-    verAfiliados(ctx);
+    await verAfiliados(ctx);
  }
 });
 
@@ -384,7 +384,7 @@ function verReferido(ctx) {
   });
 }
 
-function verAfiliados(ctx) {
+async function verAfiliados(ctx) {
   const idUser = ctx.callbackQuery.from.id;
   const endPoint = 'https://seofy.es/api/get-afiliados/'+tokenEnPoint+'/'+idUser;
   peticionGet(endPoint)
@@ -392,9 +392,12 @@ function verAfiliados(ctx) {
     //SI ES ARRAY ES PORQUE TIENE AFILIADOS
     console.log(response);
     if(Array.isArray(response)) {
+      await ctx.reply('AFILIADOS');
+      await ctx.reply('------------');
       const cantidadElementos = response.length;
       for (let i = 0; i < cantidadElementos; i++) {
         console.log('Nombre de usuario: '+response[i].nombre_usuario+' y fecha: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm'));
+        await ctx.reply('Nombre: '+response[i].nombre_usuario+', Fecha de afiliación: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm')+' (GTM +1)');
       }
     }
   })
