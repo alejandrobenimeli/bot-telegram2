@@ -403,7 +403,7 @@ async function verReferido(ctx) {
         msgAfiliadosAnterior = messageText;
       } else {
         if(msgAfiliadosAnterior != messageText) {
-          console.log('se mete en bla: '+messageText);
+          //console.log('se mete en bla: '+messageText);
           await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
           msgAfiliadosAnterior = messageText;
         }
@@ -447,7 +447,7 @@ async function verAfiliados(ctx) {
         msgAfiliados += numeroLista+'- Nombre: '+nombre_usuario+'\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n';
       }
       if (!idMessageAfiliados) {
-        await ctx.reply(msgAfiliados);
+        const sentMessage = await ctx.reply(msgAfiliados);
         idMessageAfiliados = sentMessage.message_id;
         msgAfiliadosAnterior = msgAfiliados;
       } else {
