@@ -349,7 +349,7 @@ bot.on('callback_query', async(ctx) => {
  } else if (data === 'linkAfiliado') {
     await compartirEnlace(ctx);
  } else if (data === 'verReferido') {
-    verReferido(ctx);
+    await verReferido(ctx);
  } else if (data === 'verAfiliados') {
     await verAfiliados(ctx);
  }
@@ -385,11 +385,12 @@ async function compartirEnlace(ctx) {
   }
 }
 
-function verReferido(ctx) {
+/*
+async function verReferido(ctx) {
   const idUser = ctx.callbackQuery.from.id;
   const endPoint = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+idUser;
   peticionGet(endPoint)
-  .then((response) => {
+  .then(async(response) => {
     //EN ESTE IF SE ENTRA, SI EXISTE EL USUARIO
     if(response.nombre_usuario !== false) {
       const messageText = 'Usuario referido: '+ response.nombre_usuario;
@@ -415,6 +416,38 @@ function verReferido(ctx) {
   .catch((error) => {
     console.error('error verReferido: '+error);
   });
+}
+*/
+
+async function verReferido(ctx) {
+  const idUser = ctx.callbackQuery.from.id;
+  const endPoint = 'https://seofy.es/api/exists-user-ref/'+tokenEnPoint+'/'+idUser;
+  try {
+    const response = await peticionGet(endPoint);
+    //EN ESTE IF SE ENTRA, SI EXISTE EL USUARIO
+    if (response.nombre_usuario !== false) {
+      const messageText = 'Usuario referido: '+ response.nombre_usuario;
+      //GUARDAR EN LA TABLA referidos
+      if (!idMessageAfiliados) {
+        const sentMessage = await ctx.reply(messageText);
+        idMessageAfiliados = sentMessage.message_id;
+      } else {
+        await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+      }
+    } else {
+      const messageText = 'Usuario referido: ninguno';
+      //GUARDAR EN LA TABLA referidos
+      if (!idMessageAfiliados) {
+        const sentMessage = await ctx.reply(messageText);
+        idMessageAfiliados = sentMessage.message_id;
+      } else {
+        await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText);
+      }
+      //ctx.reply('Usuario referido: ninguno');
+    }
+  } catch (error) {
+    console.error('error verReferido: '+error);
+  }
 }
 
 
