@@ -384,6 +384,8 @@ async function compartirEnlace(ctx) {
     idMessageAfiliados = sentMessage.message_id;
   } else {
     if(msgAfiliadosAnterior != messageText) {
+      console.log('msgAfiliadosAnterior:'+msgAfiliadosAnterior);
+      console.log('messageText:'+messageText);
       await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText,  {
         parse_mode: 'HTML'
       });
