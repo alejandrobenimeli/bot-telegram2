@@ -1,7 +1,7 @@
 const { Telegraf, Markup } = require('telegraf');
 const axios = require('axios');
 const moment = require('moment');
-//const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer');
 
 const bot = new Telegraf(process.env.TOKEN);
 
