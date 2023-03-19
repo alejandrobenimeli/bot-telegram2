@@ -1,7 +1,7 @@
 const { Telegraf, Markup } = require('telegraf');
 const axios = require('axios');
 const moment = require('moment');
-const puppeteer = require('puppeteer');
+//const puppeteer = require('puppeteer');
 
 const bot = new Telegraf(process.env.TOKEN);
 
@@ -148,7 +148,7 @@ bot.start((ctx) => {
 bot.hears('Sacar cita', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
   ctx.reply('Eliga una ciudad:');
-  console.log(scrapeCiudades());
+  //console.log(scrapeCiudades());
   // ...
 });
 
@@ -468,7 +468,7 @@ async function verAfiliados(ctx) {
 //------------------------------
 //SECCION SACAR CITA
 //------------------------------
-
+/*
 async function scrapeCiudades() {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -493,6 +493,7 @@ async function scrapeCiudades() {
     return optionValues;
   });
 };
+*/
 
   //------------------------------
   //FIN SECCION SACAR CITA
