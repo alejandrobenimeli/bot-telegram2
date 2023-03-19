@@ -389,6 +389,7 @@ async function compartirEnlace(ctx) {
       await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, messageText,  {
         parse_mode: 'HTML'
       });
+      msgAfiliadosAnterior = messageText;
     }
   }
 }
