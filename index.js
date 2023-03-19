@@ -148,7 +148,7 @@ bot.start((ctx) => {
 bot.hears('Sacar cita', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
   ctx.reply('Eliga una ciudad:');
-  console.log(scrapeCiudades());
+  //console.log(scrapeCiudades());
   // ...
 });
 
