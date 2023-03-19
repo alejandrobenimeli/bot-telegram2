@@ -349,14 +349,18 @@ bot.on('callback_query', async(ctx) => {
      );
    }
  } else if (data === 'linkAfiliado') {
-    ctx.reply('📣Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado. Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150 euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este enlace lo comparte con mucha gente');
-    ctx.reply('Recuerda, a cuanta mas gente lo compartas y hagan compras...mas 💲💲');
-    ctx.reply('Enlace a compartir❗')
-    console.log('el id user: '+ctx.callbackQuery.from.id);
-    console.log('el nombre del bot:'+ctx.callbackQuery.message.from.username);
-    ctx.reply('https://t.me/Papeleosextrajerosbot?start=');
+    await compartirEnlace(ctx);
  }
 });
+
+async function compartirEnlace(ctx) {
+  await ctx.reply('📣Si comparte este link, ganará 25 euros por cada compra efectiva que se realice desde su enlace de afiliado. Ejemplo: si una persona compra 6 tramites siendo referido suyo, usted ganará 150 euros (6 x 25). Y este ejemplo es con una persona, imaginese lo que puede llegar a ganar si este enlace lo comparte con mucha gente');
+  await ctx.reply('Recuerda, a cuanta mas gente lo compartas y hagan compras...mas 💲💲');
+  await ctx.reply('Enlace a compartir❗')
+  const idUser = ctx.callbackQuery.from.id;
+  const nameBot = ctx.callbackQuery.message.from.username;
+  await ctx.reply('https://t.me/'+nameBot+'?start='+idUser);
+}
 
 /*
 //el evento se produce cuando el usario escribe algo, tiene que ir debajo del command.'menu' porque sino el command menu no lo coge y salta al evento on text
