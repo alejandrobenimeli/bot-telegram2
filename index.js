@@ -5,7 +5,7 @@ const moment = require('moment');
 
 const bot = new Telegraf(process.env.TOKEN);
 
-const tokenEnPoint = process.env.TOKEN_EN_POINT; //'abl248924';
+const tokenEnPoint = process.env.TOKEN_EN_POINT;
 let previousMessageId;
 
 
@@ -148,8 +148,6 @@ bot.start((ctx) => {
 
 // Manejador de eventos para el botón "Ver lista de productos"
 bot.hears('🎂 Ver lista de productos', (ctx) => {
-
-  // Borramos el mensaje anterior
   // Acción a realizar cuando se seleccione el botón
   ctx.reply('Aquí está la lista de productos:');
   // ...
@@ -178,6 +176,8 @@ const menuAfiliados = [
 //const inlineKeyboardOptions = {   disable_web_page_preview: true, disable_notification: true};
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
+  //variables para que funcione el editMessageText cada vez que se
+  // pulsa la opcion del menu Afiliado y coga otra opcion
   idMessageAfiliados = null;
   msgAfiliadosAnterior = '';
   ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados));
@@ -421,7 +421,6 @@ async function verReferido(ctx) {
           msgAfiliadosAnterior = messageText;
         }
       }
-      //ctx.reply('Usuario referido: ninguno');
     }
   } catch (error) {
     console.error('error verReferido: '+error);
@@ -447,7 +446,16 @@ async function verAfiliados(ctx) {
         let numeroLista = i+1;
         msgAfiliados += numeroLista+'- Nombre: '+nombre_usuario+'\nFecha de afiliación: '+fecha_asociacion+' GTM+1\n\n';
       }
-      await ctx.reply(msgAfiliados);
+      if (!idMessageAfiliados) {
+        await ctx.reply(msgAfiliados);
+        idMessageAfiliados = sentMessage.message_id;
+        msgAfiliadosAnterior = msgAfiliados;
+      } else {
+        if(msgAfiliadosAnterior != msgAfiliados) {
+          await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, msgAfiliados);
+          msgAfiliadosAnterior = msgAfiliados;
+        }
+      }
     }
   } catch (error) {
     console.error('error verAfiliados: '+error);
