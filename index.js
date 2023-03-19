@@ -352,6 +352,8 @@ bot.on('callback_query', async(ctx) => {
     await compartirEnlace(ctx);
  } else if (data === 'verReferido') {
     verReferido(ctx);
+ } else if (data === 'verAfiliados') {
+    verAfiliados(ctx);
  }
 });
 
@@ -376,6 +378,27 @@ function verReferido(ctx) {
     } else {
       ctx.reply('Usuario referido: ninguno');
     }
+  })
+  .catch((error) => {
+    console.error('error verReferido: '+error);
+  });
+}
+
+function verAfiliados(ctx) {
+  const idUser = ctx.callbackQuery.from.id;
+  const endPoint = 'https://seofy.es/api/get-afiliados/'+tokenEnPoint+'/'+idUser;
+  peticionGet(endPoint)
+  .then((response) => {
+    console.log(response);
+    /*
+    //EN ESTE IF SE ENTRA, SI EXISTE EL USUARIO
+    if(response.nombre_usuario !== false) {
+      //GUARDAR EN LA TABLA referidos
+      ctx.reply('Usuario referido: '+ response.nombre_usuario);
+    } else {
+      ctx.reply('Usuario referido: ninguno');
+    }
+    */
   })
   .catch((error) => {
     console.error('error verReferido: '+error);
