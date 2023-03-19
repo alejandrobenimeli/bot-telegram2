@@ -469,9 +469,12 @@ async function verAfiliados(ctx) {
 //SECCION SACAR CITA
 //------------------------------
 
-/*
+
 async function scrapeCiudades() {
-  const browser = await puppeteer.launch();
+  //const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    executablePath: '/app/.apt/opt/google/chrome/chrome'
+  });
   const page = await browser.newPage();
   await page.goto('https://icp.administracionelectronica.gob.es/icpplus/index.html');
 
@@ -494,7 +497,7 @@ async function scrapeCiudades() {
     return optionValues;
   });
 };
-*/
+
 
   //------------------------------
   //FIN SECCION SACAR CITA
