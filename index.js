@@ -384,6 +384,28 @@ function verReferido(ctx) {
   });
 }
 
+
+async function verAfiliados(ctx) {
+  const idUser = ctx.callbackQuery.from.id;
+  const endPoint = 'https://seofy.es/api/get-afiliados/'+tokenEnPoint+'/'+idUser;
+  try {
+    const response = await peticionGet(endPoint);
+    //SI ES ARRAY ES PORQUE TIENE AFILIADOS
+    console.log(response);
+    if(Array.isArray(response)) {
+      await ctx.reply('AFILIADOS');
+      await ctx.reply('------------');
+      const cantidadElementos = response.length;
+      for (let i = 0; i < cantidadElementos; i++) {
+        console.log('Nombre de usuario: '+response[i].nombre_usuario+' y fecha: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm'));
+        await ctx.reply('Nombre: '+response[i].nombre_usuario+', Fecha de afiliación: '+moment(response[i].fecha_asociacion).format('DD/MM/YYYY HH:mm')+' GTM+1');
+      }
+    }
+  } catch (error) {
+    console.error('error verAfiliados: '+error);
+  }
+}
+/*
 async function verAfiliados(ctx) {
   const idUser = ctx.callbackQuery.from.id;
   const endPoint = 'https://seofy.es/api/get-afiliados/'+tokenEnPoint+'/'+idUser;
@@ -405,6 +427,7 @@ async function verAfiliados(ctx) {
     console.error('error verAfiliados: '+error);
   });
 }
+*/
 
 /*
 //el evento se produce cuando el usario escribe algo, tiene que ir debajo del command.'menu' porque sino el command menu no lo coge y salta al evento on text
