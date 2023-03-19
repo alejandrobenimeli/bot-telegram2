@@ -178,6 +178,8 @@ const menuAfiliados = [
 //const inlineKeyboardOptions = {   disable_web_page_preview: true, disable_notification: true};
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
+  idMessageAfiliados = null;
+  msgAfiliadosAnterior = '';
   ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados));
 });
 
