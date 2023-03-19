@@ -393,12 +393,12 @@ async function verAfiliados(ctx) {
     //SI ES ARRAY ES PORQUE TIENE AFILIADOS
     //console.log(response);
     if(Array.isArray(response)) {
+      const cantidadElementos = response.length;
       let msgAfiliados = '';
-      msgAfiliados += 'AFILIADOS\n';
-      msgAfiliados += '----------------------\n';
+      msgAfiliados += 'AFILIADOS ('+cantidadElementos+')\n';
+      msgAfiliados += '---------------------------\n';
       //await ctx.reply('AFILIADOS');
       //await ctx.reply('----------------------');
-      const cantidadElementos = response.length;
 
       for (let i = 0; i < cantidadElementos; i++) {
         let nombre_usuario = response[i].nombre_usuario;
