@@ -173,10 +173,12 @@ const menuAfiliados = [
   [{ text: 'Ver mi referido', callback_data: 'verReferido' }],
   [{ text: 'Ver mis afiliados', callback_data: 'verAfiliados' }]
 ];
+
+const inlineKeyboardOptions = { disable_web_page_preview: true };
 // Manejador de eventos para el botón "Afiliado"
 bot.hears('Afiliado', (ctx) => {
   // Acción a realizar cuando se seleccione el botón
-  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados));
+  ctx.reply('Selecciona una opción:', Markup.inlineKeyboard(menuAfiliados,inlineKeyboardOptions));
   // ...
 });
 
