@@ -389,16 +389,14 @@ function verAfiliados(ctx) {
   const endPoint = 'https://seofy.es/api/get-afiliados/'+tokenEnPoint+'/'+idUser;
   peticionGet(endPoint)
   .then((response) => {
+    //SI ES ARRAY ES PORQUE TIENE AFILIADOS
     console.log(response);
-    /*
-    //EN ESTE IF SE ENTRA, SI EXISTE EL USUARIO
-    if(response.nombre_usuario !== false) {
-      //GUARDAR EN LA TABLA referidos
-      ctx.reply('Usuario referido: '+ response.nombre_usuario);
-    } else {
-      ctx.reply('Usuario referido: ninguno');
+    if(Array.isArray(response)) {
+      const cantidadElementos = datos.length;
+      for (let i = 0; i < cantidadElementos; i++) {
+        console.log('Nombre de usuario: '+response[i].nombre_usuario+' y fecha: '+response[i].fecha_asociacion);
+      }
     }
-    */
   })
   .catch((error) => {
     console.error('error verReferido: '+error);
