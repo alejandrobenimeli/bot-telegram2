@@ -1,9 +1,31 @@
 const puppeteer = require('puppeteer');
+const tokenEnPoint = process.env.TOKEN_EN_POINT;
 
 async function main() {
   const optionValues = await scrapeCiudades();
   console.log('los valores son:');
   console.log(optionValues);
+  axios.post('https://seofy.es/api/guardar-provincias', {
+    token: tokenEnPoint,
+    provincias: optionValues
+  }, {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  })
+  .then(response => {
+    console.log(response.data);
+    //aqui notificar al tipo ID_USER_SIN_REFERIDO de que tiene un nuevo usuario referido si error = 0
+    jsonResponse = response.data;
+    if(jsonResponse.error === 0) {
+      console.log(jsonResponse.msg);
+    } else {
+      console.log('Algo salio mal');
+    }
+  })
+  .catch(error => {
+    console.log(error);
+  });
 }
 
 async function scrapeCiudades() {
