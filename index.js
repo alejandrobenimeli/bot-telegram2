@@ -490,8 +490,12 @@ async function scrapeCiudades() {
   const selectOptions = await page.evaluate(() => {
     // Selecciona el select
     const select = document.querySelector('select#form');
+    console.log('el select:');
+    console.log(select);
     // Obtiene todas las opciones del select
     const options = select.querySelectorAll('option');
+    console.log('las options:');
+    console.log(options);
     // Crea un arreglo para almacenar los valores de las opciones
     const optionValues = [];
     // Itera sobre las opciones y extrae sus valores, ignorando la primera opción
