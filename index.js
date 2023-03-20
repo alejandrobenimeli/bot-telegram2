@@ -499,12 +499,14 @@ async function scrapeCiudades() {
     // Crea un arreglo para almacenar los valores de las opciones
     const optionValues = [];
     // Itera sobre las opciones y extrae sus valores, ignorando la primera opción
-    for (let i = 0; i < options.length; i++) {
+    for (let i = 1; i < options.length; i++) {
       const optionValue = options[i].value;
       optionValues.push(optionValue);
     }
     return optionValues;
   });
+  await browser.close();
+  return selectOptions;
 };
 
 
