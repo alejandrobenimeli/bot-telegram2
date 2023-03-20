@@ -1,4 +1,6 @@
 const puppeteer = require('puppeteer');
+const axios = require('axios');
+
 const tokenEnPoint = process.env.TOKEN_EN_POINT;
 
 async function main() {
