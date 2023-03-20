@@ -16,7 +16,7 @@ async function scrapeCiudades() {
   });
   //const browser = await puppeteer.launch({executablePath: '/app/.apt/opt/google/chrome/chrome'});
   const page = await browser.newPage();
-  await page.goto('https://icp.administracionelectronica.gob.es/icpplus/index.html');
+  await page.goto(process.env.URL_CITAS);
   // Espera a que el select esté disponible en la página
   await page.waitForSelector('select#form');
   // Obtiene todas las opciones del select
