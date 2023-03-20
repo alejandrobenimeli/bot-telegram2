@@ -474,8 +474,8 @@ async function scrapeCiudades() {
   const browser = await puppeteer.launch({
     headless: true,
     args: [
-      'no-sandbox',
-      'disable-setuid-sandbox',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
     ]
   });
   //const browser = await puppeteer.launch({executablePath: '/app/.apt/opt/google/chrome/chrome'});
