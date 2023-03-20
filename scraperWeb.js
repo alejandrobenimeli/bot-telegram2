@@ -37,3 +37,5 @@ async function scrapeCiudades() {
   await browser.close();
   return selectOptions;
 };
+
+main();
