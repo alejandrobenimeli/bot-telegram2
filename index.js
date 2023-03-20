@@ -145,10 +145,11 @@ bot.start((ctx) => {
 });
 
 // Manejador de eventos para el botón "Ver lista de productos"
-bot.hears('Sacar cita', (ctx) => {
+bot.hears('Sacar cita', async (ctx) => {
   // Acción a realizar cuando se seleccione el botón
   ctx.reply('Eliga una ciudad:');
-  console.log(scrapeCiudades());
+   const optionValues = await scrapeCiudades();
+  console.log(optionValues);
   // ...
 });
 
