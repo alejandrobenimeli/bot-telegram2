@@ -1,8 +1,10 @@
 const puppeteer = require('puppeteer');
 
-const optionValues = await scrapeCiudades();
-console.log('los valores son:');
-console.log(optionValues);
+async function main() {
+  const optionValues = await scrapeCiudades();
+  console.log('los valores son:');
+  console.log(optionValues);
+}
 
 async function scrapeCiudades() {
   const browser = await puppeteer.launch({
