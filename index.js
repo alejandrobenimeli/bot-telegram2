@@ -500,7 +500,7 @@ async function scrapeCiudades() {
     const optionValues = [];
     // Itera sobre las opciones y extrae sus valores, ignorando la primera opción
     for (let i = 1; i < options.length; i++) {
-      const optionValue = options[i].value;
+      const optionValue = options[i].text;
       optionValues.push(optionValue);
     }
     return optionValues;
