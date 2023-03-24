@@ -57,6 +57,7 @@ bot.start((ctx) => {
               token: tokenEnPoint,
               idUser: userId.userid,
               nameUser: userId.name,
+              language: userId.language,
               idRef: userRef
             }, {
               headers: {
@@ -109,6 +110,7 @@ bot.start((ctx) => {
         axios.post('https://seofy.es/api/guardar-user', {
           token: tokenEnPoint,
           idUser: userId.userid,
+          language: userId.language,
           nameUser: userId.name
         }, {
           headers: {
