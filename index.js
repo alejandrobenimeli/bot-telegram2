@@ -97,7 +97,7 @@ bot.start((ctx) => {
       bot.telegram.sendMessage(userId.userid, 'No se te asocio a ningún referido, ya que el formato introducido es incorrecto');
     }
   } else {
-    console.log('no hay ningun usuario referido');
+    console.log('no hay ningun usuario referid');
     console.log('el user id: '+userId.userid+' , el name: '+userId.name+', el language: '+userId.language);
     //comprobar si existe en la base de datos como userRef o userId. si existe no hacer nada. si no existse
     //guardar el userid vacio sin referidos en la bd como userRef (tabla referidos)
