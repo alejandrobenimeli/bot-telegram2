@@ -456,6 +456,18 @@ async function verAfiliados(ctx) {
           msgAfiliadosAnterior = msgAfiliados;
         }
       }
+    } else { //CUANDO NO HAY RESULTADOS DE AFILIADOS
+      const msgAfiliados = 'Usuarios afiliados: ninguno';
+      if (!idMessageAfiliados) {
+        const sentMessage = await ctx.reply(msgAfiliados);
+        idMessageAfiliados = sentMessage.message_id;
+        msgAfiliadosAnterior = msgAfiliados;
+      } else {
+        if(msgAfiliadosAnterior != msgAfiliados) {
+          await ctx.telegram.editMessageText(ctx.chat.id, idMessageAfiliados, null, msgAfiliados);
+          msgAfiliadosAnterior = msgAfiliados;
+        }
+      }
     }
   } catch (error) {
     console.error('error verAfiliados: '+error);
@@ -470,7 +482,8 @@ async function verAfiliados(ctx) {
 //SECCION SACAR CITA
 //------------------------------
 
-
+//QUE EL SCRAPPER SEA EN PHP O NODEJS Y QUE SEA LLAMADO POR UN CRON CADA 24HR Y SE ACTUALIZE LA BASE DE DATOS
+//SI HAY MODIFICACIONES
 async function scrapeCiudades() {
   const browser = await puppeteer.launch({
     headless: true,
@@ -482,20 +495,14 @@ async function scrapeCiudades() {
   //const browser = await puppeteer.launch({executablePath: '/app/.apt/opt/google/chrome/chrome'});
   const page = await browser.newPage();
   await page.goto('https://icp.administracionelectronica.gob.es/icpplus/index.html');
-  console.log('llega despues del goto');
   // Espera a que el select esté disponible en la página
   await page.waitForSelector('select#form');
-  console.log('llega despues del wait');
   // Obtiene todas las opciones del select
   const selectOptions = await page.evaluate(() => {
     // Selecciona el select
     const select = document.querySelector('select#form');
-    console.log('el select:');
-    console.log(select);
     // Obtiene todas las opciones del select
     const options = select.querySelectorAll('option');
-    console.log('las options:');
-    console.log(options);
     // Crea un arreglo para almacenar los valores de las opciones
     const optionValues = [];
     // Itera sobre las opciones y extrae sus valores, ignorando la primera opción
